@@ -4,10 +4,26 @@ import {StatusBar} from 'ionic-native';
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {ListPage} from './pages/list/list';
 
+import {
+    FIREBASE_PROVIDERS, defaultFirebase,
+    AngularFire, firebaseAuthConfig, AuthProviders,
+    AuthMethods
+} from 'angularfire2';
+
 
 @App({
   templateUrl: 'build/app.html',
-  config: {} // http://ionicframework.com/docs/v2/api/config/Config/
+  config: {}, // http://ionicframework.com/docs/v2/api/config/Config/,
+  providers: [
+        FIREBASE_PROVIDERS,
+        defaultFirebase('https://clearlyinnovative-firebasestarterapp.firebaseio.com/'),
+        firebaseAuthConfig({
+            provider: AuthProviders.Password,
+            method: AuthMethods.Password,
+            remember: 'default',
+            scope: ['email']
+        })
+    ],
 })
 class MyApp {
   @ViewChild(Nav) nav: Nav;

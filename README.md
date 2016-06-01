@@ -13,7 +13,9 @@ see this comment
 
 
 #### solutions
+---
 There are many other and beautiful solutions.
+
 - https://www.quora.com/Whats-the-closest-open-source-alternative-to-Firebase
 -   
 

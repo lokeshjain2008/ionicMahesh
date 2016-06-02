@@ -49,7 +49,7 @@ export class HomePage implements OnInit {
 					this.authInfo = data.password 
 					this.authInfo.displayName = data.password.email
 				}
-                this.textItems = this.af.list('/textItems');
+                this.textItems = this.af.database.list('/textItems');
 
                 //this.getMoreData()
 

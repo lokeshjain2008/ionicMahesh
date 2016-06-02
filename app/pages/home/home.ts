@@ -42,9 +42,9 @@ export class HomePage implements OnInit {
 				if (data.twitter) {
 					this.authInfo =  data.twitter
 					this.authInfo.displayName = data.twitter.displayName
-				} else if (data.github) {
-					this.authInfo =  data.github 
-					this.authInfo.displayName = data.github.displayName
+				} else if (data.google) {
+					this.authInfo =  data.google 
+					this.authInfo.displayName = data.google.displayName
 				} else {
 					this.authInfo = data.password 
 					this.authInfo.displayName = data.password.email

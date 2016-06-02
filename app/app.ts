@@ -16,7 +16,7 @@ import {
   config: {}, // http://ionicframework.com/docs/v2/api/config/Config/,
   providers: [
         FIREBASE_PROVIDERS,
-        defaultFirebase('https://project-2261219643250472644.firebaseio.com/'), 
+        defaultFirebase('https://maheshkidukaan.firebaseio.com/'), 
         firebaseAuthConfig({
             provider: AuthProviders.Password,
             method: AuthMethods.Password,

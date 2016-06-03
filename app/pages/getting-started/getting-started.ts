@@ -2,6 +2,7 @@ import {Page, Alert, Loading, NavController} from 'ionic-angular';
 
 import {HomePage} from '../home/home';
 
+import { MenuPage }  from '../menu/menu';
 
 
 @Page({
@@ -25,9 +26,13 @@ export class GettingStartedPage {
   }
   
   
-  goto(){
+  gotoHomePaqe(){
       this.nav.push(HomePage);
   }
   
+  
+  gotoMenuPage(){
+      this.nav.push(MenuPage);
+  }
   
 }

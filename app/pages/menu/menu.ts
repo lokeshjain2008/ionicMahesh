@@ -5,22 +5,22 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 
 @Page({
     templateUrl: 'build/pages/menu/menu.html',
-    
+
 })
 export class MenuPage implements OnInit{
     menuItems: FirebaseListObservable<Object>;
-    
+
     constructor(private nav: NavController, private af: AngularFire){
-        
+
     }
-    
+
     ngOnInit(){
         this.menuItems = this.af.database.list('/menu');
     }
-    
-   addItem(item){
+
+   addTheItem(item){
        this.menuItems.push(item);
    }
-    
-    
+
+
 }

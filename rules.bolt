@@ -1,0 +1,81 @@
+// Functions
+
+isSelfData(uid){ auth != null && auth.uid == uid}
+isLoggedIn() {  auth != null}
+
+// Data Type
+type Menu{
+	title: String,
+	desc: String,
+	created: Number,
+	message: String
+
+	// validate character length of the message property
+  validate(){
+  	this.message.length <= 140 &&
+  	this.created == now;
+  }
+}
+
+// Allow anyone to read the list of Posts.
+path /menu {
+  read() { true}
+}
+// All individual Posts are writable by anyone.
+path /menu/{id} is Menu {
+  write() {
+  	auth!=null && prior(root).child('/users').uid
+  }
+  //create(){
+  //	isLoggedIn()
+  //}
+  //update(){
+  //	isLoggedIn()
+  //}
+  //delete(){
+  //	isSelfData(id)
+  //}
+}
+
+
+// can be defined later
+type User{
+
+}
+
+path /users/{userId} {
+	read(){ true}
+	write(){ true}
+}
+
+
+//Testing with the rules
+
+path /settings {
+	validate(){ this.message.length <= 140}
+	write(){
+		data.child('readOnly').val() == 1
+	}
+}
+
+// See this https://github.com/firebase/bolt/blob/master/docs/language.md
+//
+// bolt is an alias for firebase-bolt < rules.bolt > rules.json
+
+// Important rules to understand
+// 1. Either you can have `write` or all other `create, update, delete` to gain more control
+// 2. Exists() is not there in the bolt
+// 3. We can put validation related thing `validate` in type definition of rule definition.
+// 4. For the timestamp for the created and update user `Firebase.ServerValue.TIMESTAMP` in you code not here.
+//    For more http://stackoverflow.com/questions/34266879/can-i-created-date-property-if-user-not-send
+// 5. There is difference in the `prior` with root. and root i.e [prior(root) vs root]
+// 		Note this,The reason is subtle (not obvious): To support multi-location updates, you need to be able to write
+// 		rules that will refer to the "new" value of the date. The standard in Bolt is that in write and validation rules, this and root references are newData values (in read rules, this and root are data - old/existing - values).
+// 6. More use of prior https://github.com/firebase/bolt/issues/35
+// 7. Related to Timestamp. there is more the `bolt` https://github.com/firebase/bolt/blob/master/docs/guide.md
+//
+//
+
+
+
+

@@ -1,0 +1,36 @@
+{
+  "rules": {
+    "menu": {
+      ".read": "true",
+      "$id": {
+        ".validate": "newData.hasChildren(['title', 'desc', 'created', 'message']) && newData.child('message').val().length <= 140 && newData.child('created').val() == now",
+        "title": {
+          ".validate": "newData.isString()"
+        },
+        "desc": {
+          ".validate": "newData.isString()"
+        },
+        "created": {
+          ".validate": "newData.isNumber()"
+        },
+        "message": {
+          ".validate": "newData.isString()"
+        },
+        "$other": {
+          ".validate": "false"
+        },
+        ".write": "auth != null && root.child('/users').uid"
+      }
+    },
+    "users": {
+      "$userId": {
+        ".read": "true",
+        ".write": "true"
+      }
+    },
+    "settings": {
+      ".validate": "newData.child('message').val().length <= 140",
+      ".write": "data.child('readOnly').val() == 1"
+    }
+  }
+}

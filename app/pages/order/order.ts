@@ -27,6 +27,11 @@ export class OrderPage implements OnInit{
 				return true;
     	} else{
     		//do some base work.
+    		this.af.object('orders/'+this.userId).set({
+    			userId: this.userId,
+    			totalAmount: 0,
+    			items: []
+    		})
     	}
     },
     	(err)=> console.log(err)

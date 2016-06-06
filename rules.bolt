@@ -2,12 +2,11 @@
 
 isSelfData(id){ auth != null && auth.uid == id}
 isLoggedIn() {  auth != null}
-isBaap() { auth!=null &&
-  auth.uid == 'google:116068349236349761960'
-  }
+//isBaap() { auth!=null &&
+//  auth.uid == 'google:116068349236349761960'
+//  }
 isFather(){
-  auth!=null &&
-    prior(root).child('users').child(auth.uid).child('role').val() == 'father'
+  auth!=null && prior(root).child('users').child(auth.uid).child('role').val() == 'father';
 }
 
 // Data Type
@@ -76,7 +75,7 @@ path /canteen  is Canteen{
     true;
   }
   write(){
-    isBaap();
+    isFather();
   }
 
 }
@@ -89,23 +88,23 @@ type Order{
 }
 
 path /orders {
-  write {
-    isBaap();
+  write() {
+    isFather()
   }
 
-  read {
-    isBaap();
+  read() {
+    isFather()
   }
 
 }
 
 path /orders/{order} is Order{
-  read {
+  read() {
     auth != null &&
-    this.uid == auth.uid;
+    this.$order == auth.uid
   }
 
-  write {
+  write() {
     isLoggedIn();
   }
 

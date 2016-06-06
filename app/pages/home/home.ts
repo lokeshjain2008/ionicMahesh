@@ -97,7 +97,7 @@ export class HomePage implements OnInit {
 
 
     goToOrderPage(){
-        this._nav.push(OrderPage, { userId: this.authInfo.uid });
+        this._nav.push(OrderPage, {userId:this.authInfo.userId});
     }
 
     /**

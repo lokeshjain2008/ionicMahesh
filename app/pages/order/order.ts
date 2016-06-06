@@ -8,19 +8,27 @@ import {FirebaseRef, AngularFire, FirebaseAuth, FirebaseDatabase, FirebaseListOb
 export class OrderPage implements OnInit{
 
 	order: FirebaseObjectObservable<any>;
-	userId: string
+	userId: string;
+	menu: FirebaseListObservable<any>;
 
 	constructor(private _nav: NavController, private _navParams: NavParams,
-		private af: AngularFire,
-		private ref: FirebaseRef
+		private af: AngularFire
+
 		){
 
 		this.userId = _navParams.get('userId');
 	}
 
 	ngOnInit(){
+		this.menu = this.af.list('menu');
     this.order = this.af.object('orders/' + this.userId);
-    this.order.subscribe((data)=>console.log(data),
+    this.order.subscribe((data)=>{
+    	if(data) {
+				return true;
+    	} else{
+    		//do some base work.
+    	}
+    },
     	(err)=> console.log(err)
     	)
 	}

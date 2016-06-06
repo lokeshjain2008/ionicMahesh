@@ -43,7 +43,42 @@
         ".validate": "false"
       },
       ".read": "true",
-      ".write": "auth != null && auth.uid == 'google:116068349236349761960'"
+      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'"
+    },
+    "orders": {
+      ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
+      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
+      "$order": {
+        ".validate": "newData.hasChildren(['totalAmount', 'userId'])",
+        "items": {
+          "$key1": {
+            ".validate": "newData.hasChildren(['name', 'price', 'desc']) && newData.child('name').val() != null && newData.child('price').val() > 0 && newData.child('desc').val().length <= 140",
+            "name": {
+              ".validate": "newData.isString()"
+            },
+            "price": {
+              ".validate": "newData.isNumber()"
+            },
+            "desc": {
+              ".validate": "newData.isString()"
+            },
+            "$other": {
+              ".validate": "false"
+            }
+          }
+        },
+        "totalAmount": {
+          ".validate": "newData.isNumber()"
+        },
+        "userId": {
+          ".validate": "newData.isString()"
+        },
+        "$other": {
+          ".validate": "false"
+        },
+        ".read": "auth != null && data.child('$order').val() == auth.uid",
+        ".write": "auth != null"
+      }
     },
     "textItems": {
       ".read": "true",

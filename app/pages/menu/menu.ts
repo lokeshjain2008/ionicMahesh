@@ -16,6 +16,7 @@ export class MenuPage implements OnInit {
 
   ngOnInit() {
     this.menuItems = this.af.database.list('/menu');
+
   }
 
   addTheItem(itemForm: NgForm) {

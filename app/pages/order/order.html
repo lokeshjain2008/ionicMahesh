@@ -1,0 +1,20 @@
+<ion-navbar *navbar>
+
+	Your orders
+</ion-navbar>
+
+
+<ion-content>
+	<ion-title>
+		Select menu
+	</ion-title>
+
+	<ion-card  *ngFor=" let item of menu | async">
+		<ion-card-content>
+			{{ item.name }} - {{ item.price}} <<button outline round (click)="addToOrder(item)">
+				Add+
+			</button>
+		</ion-card-content>
+	</ion-card>
+
+</ion-content>

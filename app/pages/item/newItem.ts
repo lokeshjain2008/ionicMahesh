@@ -22,7 +22,7 @@ export class NewItemModal {
         console.log("initialize NewItemModal")
     }
 
-    /** 
+    /**
      * this will dismiss the modal page
      */
     dismiss() {

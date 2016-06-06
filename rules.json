@@ -1,8 +1,10 @@
 {
   "rules": {
     "menu": {
+      ".read": "auth != null",
+      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
       "$id": {
-        ".validate": "newData.hasChildren(['name', 'price', 'desc']) && newData.child('name').val() != null && newData.child('price').val() > 0 && newData.child('desc').child('lenght').val() <= 140",
+        ".validate": "newData.hasChildren(['name', 'price', 'desc']) && newData.child('name').val() != null && newData.child('price').val() > 0 && newData.child('desc').val().length <= 140",
         "name": {
           ".validate": "newData.isString()"
         },
@@ -14,9 +16,7 @@
         },
         "$other": {
           ".validate": "false"
-        },
-        ".read": "auth != null",
-        ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'"
+        }
       }
     },
     "users": {
@@ -44,6 +44,10 @@
       },
       ".read": "true",
       ".write": "auth != null && auth.uid == 'google:116068349236349761960'"
+    },
+    "textItems": {
+      ".read": "true",
+      ".write": "auth != null"
     },
     "settings": {
       ".validate": "newData.child('message').val().length <= 140",

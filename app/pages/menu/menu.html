@@ -1,27 +1,33 @@
-<ion-navbar *nvabar>
+<ion-navbar *navbar>
     <ion-title>
         Menu item
     </ion-title>
-    
+
 </ion-navbar>
 
+
 <ion-content>
-    
+
     <div *ngFor="let item of menuItems | async">
         <ion-card>
-            {{ item.title}} - {{ item.description}}
+            <ion-header>  {{ item.name}} - {{ item.price}} </ion-header>
+            <ion-content> {{ item.desc}} </ion-content>
         </ion-card>
     </div>
-    
-    
-    <form #modelData="ngForm" (ngSubmit)="addTheItem(modelData.value)">
+
+
+    <form #modelData="ngForm" (submit)="addTheItem(modelData)">
     <ion-item>
         <ion-label>Title</ion-label>
-        <ion-input required type="text" ngControl="title"></ion-input>
+        <ion-input required type="text" ngControl="name"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label> Price </ion-label>
+        <ion-input required type="number" ngControl="price"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label>Description</ion-label>
-        <ion-input required type="text" ngControl="description"></ion-input>
+        <ion-input required type="text" ngControl="desc"></ion-input>
     </ion-item>
 
     <div padding>

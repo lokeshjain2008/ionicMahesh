@@ -12,8 +12,8 @@ export class GettingStartedPage {
   constructor(private nav: NavController) {
 
   }
-  
-  
+
+
   //loaders
   showLoading(){
       let loader =  Loading.create({
@@ -22,17 +22,17 @@ export class GettingStartedPage {
           duration: 3200
       });
       this.nav.present(loader);
-      
+
   }
-  
-  
-  gotoHomePaqe(){
+
+
+  gotoHomePage(){
       this.nav.push(HomePage);
   }
-  
-  
+
+
   gotoMenuPage(){
       this.nav.push(MenuPage);
   }
-  
+
 }

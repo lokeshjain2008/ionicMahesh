@@ -4,7 +4,10 @@ import {Observable} from 'rxjs/Observable';
 import {LoginPage} from '../login/login'
 import {NewItemModal} from '../item/newItem';
 // import {MomentDate} from '../../lib/MomentDate'
+import {OrderPage} from '../order/order';
+
 import 'rxjs';
+
 
 
 import {FirebaseAuth, AuthProviders, AuthMethods, FirebaseRef, AngularFire } from 'angularfire2';
@@ -13,7 +16,7 @@ import {FirebaseAuth, AuthProviders, AuthMethods, FirebaseRef, AngularFire } fro
     templateUrl: 'build/pages/home/home.html',
     pipes: [
         // MomentDate
-        ]
+    ]
 })
 export class HomePage implements OnInit {
     textItems: Observable<any[]>;
@@ -24,7 +27,7 @@ export class HomePage implements OnInit {
         @Inject(FirebaseRef) public ref: Firebase,
         public af: AngularFire,
         public auth: FirebaseAuth,
-        public navCtrl: NavController) {
+        public _nav: NavController) {
         // dont do anything heavy here... do it in ngOnInit
     }
 
@@ -37,18 +40,23 @@ export class HomePage implements OnInit {
         // show the login modal page
         this.auth.subscribe((data) => {
             console.log("in auth subscribe", data)
-          if (data) {
-    				if (data.twitter) {
-    					this.authInfo =  data.twitter
-    					this.authInfo.displayName = data.twitter.displayName
-    				} else if (data.google) {
-    					this.authInfo =  data.google
-    					this.authInfo.displayName = data.google.displayName
-    				} else {
-    					this.authInfo = data.password
-    					this.authInfo.displayName = data.password.email
-    				}
-              this.textItems = this.af.database.list('/textItems');
+            if (data) {
+                if (data.twitter) {
+                    this.authInfo = data.twitter
+                    this.authInfo.displayName = data.twitter.displayName
+                } else if (data.google) {
+                    this.authInfo = data.google
+                    this.authInfo.userId = data.uid;
+                    this.authInfo.displayName = data.google.displayName
+                    this.ref.child("users").child(data.uid).update({
+                        provider: data.provider,
+                        name: data.google.displayName
+                    });
+                } else {
+                    this.authInfo = data.password
+                    this.authInfo.displayName = data.password.email
+                }
+                this.textItems = this.af.database.list('/textItems');
 
                 //this.getMoreData()
 
@@ -60,12 +68,12 @@ export class HomePage implements OnInit {
     }
 
     getMoreData() {
-      this.usersWithMessages = this.af.list('/users').map((_users) => {
-        return _users.map((_user) => {
-          _user.messages = this.af.object("/userObjects/public-messages/" + _user.$key)
-          return _user;
+        this.usersWithMessages = this.af.list('/users').map((_users) => {
+            return _users.map((_user) => {
+                _user.messages = this.af.object("/userObjects/public-messages/" + _user.$key)
+                return _user;
+            });
         });
-      });
     }
 
     /**
@@ -73,7 +81,7 @@ export class HomePage implements OnInit {
      */
     displayLoginModal() {
         let loginPage = Modal.create(LoginPage);
-        this.navCtrl.present(loginPage);
+        this._nav.present(loginPage);
     }
 
     /**
@@ -84,7 +92,12 @@ export class HomePage implements OnInit {
      */
     addNewItemClicked(_data) {
         let newItemPage = Modal.create(NewItemModal, { "user": this.authInfo });
-        this.navCtrl.present(newItemPage);
+        this._nav.present(newItemPage);
+    }
+
+
+    goToOrderPage(){
+        this._nav.push(OrderPage, { userId: this.authInfo.uid });
     }
 
     /**
@@ -92,7 +105,7 @@ export class HomePage implements OnInit {
      */
     logoutClicked() {
 
-        if (this.authInfo && (this.authInfo.email ||  this.authInfo.accessToken)) {
+        if (this.authInfo && (this.authInfo.email || this.authInfo.accessToken)) {
             this.auth.logout();
             return;
         }

@@ -5,6 +5,10 @@ isLoggedIn() {  auth != null}
 isBaap() { auth!=null &&
   auth.uid == 'google:116068349236349761960'
   }
+isFather(){
+  auth!=null &&
+    prior(root).child('users').child(auth.uid).child('role').val() == 'father'
+}
 
 // Data Type
 type Menu{
@@ -15,21 +19,26 @@ type Menu{
 	validate(){
     this.name != null &&
     this.price >0 &&
-    this.desc.lenght <=140;
+    this.desc.length <=140;
   }
 }
 
-// All individual Posts are writable by anyone.
-path /menu/{id} is Menu {
+path /menu {
 
   read(){
     isLoggedIn();
   }
-
-  write() {
-  	auth!=null &&
-    prior(root).child('users').child(auth.uid).child('role').val() == 'father'
+  write(){
+    isFather();
   }
+
+}
+// All individual Posts are writable by anyone.
+path /menu/{id} is Menu {
+
+  //read() {
+  //	isFather();
+  //}
   //create(){
   //	isLoggedIn()
   //}
@@ -72,9 +81,46 @@ path /canteen  is Canteen{
 
 }
 
+//order element
+type Order{
+  items: Menu[],
+  totalAmount: Number,
+  userId: String
+}
 
+path /orders {
+  write {
+    isBaap();
+  }
+
+  read {
+    isBaap();
+  }
+
+}
+
+path /orders/{order} is Order{
+  read {
+    auth != null &&
+    this.uid == auth.uid;
+  }
+
+  write {
+    isLoggedIn();
+  }
+
+}
 
 //Testing with the rules
+
+path /textItems {
+  read(){
+    true;
+  }
+  write(){
+    isLoggedIn();
+  }
+}
 
 path /settings {
 	validate(){ this.message.length <= 140}

@@ -49,27 +49,18 @@ export class OrderPage implements OnInit {
 
 
 	watchOrder(){
-		// var test = this.items.scan((acc, item) => {
 
-		// 	return acc + item[0].price;
-		// });
-
-		// test.subscribe((totalAmount) => {
-		// 	console.log(totalAmount);
-		// 	if(totalAmount && this.userId) {
-		// 		this.af.object('orders/'+ this.userId+'/totalAmount').update(+totalAmount);
-		// 	}
-
-		// },(err)=>console.log(err),
-		// ()=>console.log("Done...")
-		// );
 
 	}
 
 
 	addToOrder(item) {
 		delete item.$key;
-		this.items.push(item).then(data=>console.log(data));
+
+		this.items.push(item).then(data =>{
+
+			this.af.object('/orders/' + this.userId + '/totalAmount').set(totalAmount);
+		});
 
 	}
 

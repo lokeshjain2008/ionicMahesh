@@ -6,6 +6,8 @@ import {NewItemModal} from '../item/newItem';
 // import {MomentDate} from '../../lib/MomentDate'
 import {OrderPage} from '../order/order';
 
+import {User} from '../../models';
+
 import 'rxjs';
 
 
@@ -48,10 +50,17 @@ export class HomePage implements OnInit {
                     this.authInfo = data.google
                     this.authInfo.userId = data.uid;
                     this.authInfo.displayName = data.google.displayName
-                    this.ref.child("users").child(data.uid).update({
-                        provider: data.provider,
-                        name: data.google.displayName
-                    });
+                    //Create user to save into database
+                    let userData: User = {
+                        email: data.google.email,
+                        displayName: data.google.displayName,
+                        userId: data.google.userId,
+                        profileImageURL: data.google.profileImageURL,
+                        role: null
+                    };
+
+                    this.ref.child("users").child(data.uid).update(userData);
+
                 } else {
                     this.authInfo = data.password
                     this.authInfo.displayName = data.password.email

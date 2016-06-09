@@ -51,12 +51,27 @@ path /menu/{id} is Menu {
 
 
 // can be defined later
-type User{
-
+type User {
+  email: String,
+  profileImageURL: String,
+  displayName: String,
+  userId: String,
+  role: String,
+  validate(){
+    this.role == null
+  }
 }
 
-path /users/{userId} {
-	read(){ auth!=null}
+path /users {
+  read(){
+    isFather()
+  }
+}
+
+path /users/{userId} is User{
+	read(){
+    isSelfData(userId)
+  }
 	write(){
     isSelfData(userId);
   }
@@ -83,8 +98,16 @@ path /canteen  is Canteen{
 //order element
 type Order{
   items: Menu[],
+  amount: Number,
+}
+
+type UserOrder{
   totalAmount: Number,
-  userId: String
+  userId: String,
+  displayName: String,
+  profileImageURL: String,
+  email: String,
+  orders: Order[]
 }
 
 path /orders {
@@ -97,6 +120,25 @@ path /orders {
   }
 
 }
+
+path /user-orders {
+  read(){
+    isFather()
+  }
+  write(){
+    isFather()
+  }
+}
+
+path /user-orders/{userId} is UserOrder{
+  read(){
+    isSelfData($userId)
+  }
+  write(){
+    isSelfData($userId)
+  }
+}
+
 
 path /orders/{order} is Order{
   read() {

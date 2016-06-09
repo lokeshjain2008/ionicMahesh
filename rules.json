@@ -20,8 +20,28 @@
       }
     },
     "users": {
+      ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
       "$userId": {
-        ".read": "auth != null",
+        ".validate": "newData.hasChildren(['email', 'profileImageURL', 'displayName', 'userId', 'role']) && newData.child('role').val() == null",
+        "email": {
+          ".validate": "newData.isString()"
+        },
+        "profileImageURL": {
+          ".validate": "newData.isString()"
+        },
+        "displayName": {
+          ".validate": "newData.isString()"
+        },
+        "userId": {
+          ".validate": "newData.isString()"
+        },
+        "role": {
+          ".validate": "newData.isString()"
+        },
+        "$other": {
+          ".validate": "false"
+        },
+        ".read": "auth != null && auth.uid == $userId",
         ".write": "auth != null && auth.uid == $userId"
       }
     },
@@ -49,9 +69,9 @@
       ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
       ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
       "$order": {
-        ".validate": "newData.hasChildren(['totalAmount', 'userId'])",
+        ".validate": "newData.hasChildren(['amount'])",
         "items": {
-          "$key1": {
+          "$key2": {
             ".validate": "newData.hasChildren(['name', 'price', 'desc']) && newData.child('name').val() != null && newData.child('price').val() > 0 && newData.child('desc').val().length <= 140",
             "name": {
               ".validate": "newData.isString()"
@@ -67,17 +87,69 @@
             }
           }
         },
-        "totalAmount": {
+        "amount": {
           ".validate": "newData.isNumber()"
-        },
-        "userId": {
-          ".validate": "newData.isString()"
         },
         "$other": {
           ".validate": "false"
         },
         ".read": "auth != null && data.child('$order').val() == auth.uid",
         ".write": "auth != null"
+      }
+    },
+    "user-orders": {
+      ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
+      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
+      "$userId": {
+        ".validate": "newData.hasChildren(['totalAmount', 'userId', 'displayName', 'profileImageURL', 'email'])",
+        "totalAmount": {
+          ".validate": "newData.isNumber()"
+        },
+        "userId": {
+          ".validate": "newData.isString()"
+        },
+        "displayName": {
+          ".validate": "newData.isString()"
+        },
+        "profileImageURL": {
+          ".validate": "newData.isString()"
+        },
+        "email": {
+          ".validate": "newData.isString()"
+        },
+        "orders": {
+          "$key1": {
+            ".validate": "newData.hasChildren(['amount'])",
+            "items": {
+              "$key2": {
+                ".validate": "newData.hasChildren(['name', 'price', 'desc']) && newData.child('name').val() != null && newData.child('price').val() > 0 && newData.child('desc').val().length <= 140",
+                "name": {
+                  ".validate": "newData.isString()"
+                },
+                "price": {
+                  ".validate": "newData.isNumber()"
+                },
+                "desc": {
+                  ".validate": "newData.isString()"
+                },
+                "$other": {
+                  ".validate": "false"
+                }
+              }
+            },
+            "amount": {
+              ".validate": "newData.isNumber()"
+            },
+            "$other": {
+              ".validate": "false"
+            }
+          }
+        },
+        "$other": {
+          ".validate": "false"
+        },
+        ".read": "auth != null && auth.uid == $userId",
+        ".write": "auth != null && auth.uid == $userId"
       }
     },
     "textItems": {

@@ -28,7 +28,6 @@ export class OrderPage implements OnInit {
     this.order.subscribe((data) => {
 			if (data) {
 				this.items = this.af.database.list('orders/' + this.userId + '/items');
-				this.watchOrder();
 				return true;
 			} else {
 				//do some base work.
@@ -38,7 +37,6 @@ export class OrderPage implements OnInit {
 					items: []
 				}).then((data) => {
 					this.items = this.af.database.list('orders/' + this.userId + '/items');
-					this.watchOrder();
 				});
 			}
     },
@@ -48,20 +46,21 @@ export class OrderPage implements OnInit {
 	}
 
 
-	watchOrder(){
-
+	calculateOrderAmount(){
+		this.af.list('orders/' + this.userId + '/items').subscribe((items) => {
+			let totalAmount = items.reduce((acc, item) => { return acc + item.price; }, 0)
+			console.log(totalAmount);
+			this.af.object('/orders/' + this.userId + '/totalAmount').set(totalAmount);
+		})
 
 	}
 
 
 	addToOrder(item) {
-		delete item.$key;
-
-		this.items.push(item).then(data =>{
-
-			this.af.object('/orders/' + this.userId + '/totalAmount').set(totalAmount);
+		delete item.$key; // needed, to satify the data structure.
+		this.items.push(item).then(data =>{ //If item is then calculate the amount
+			this.calculateOrderAmount();
 		});
-
 	}
 
 

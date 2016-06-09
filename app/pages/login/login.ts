@@ -1,8 +1,8 @@
-import {Modal, NavController, Page, ViewController} from 'ionic-angular';
+import {Modal, NavController, ViewController} from 'ionic-angular';
 import {Component, OnInit, Inject} from '@angular/core';
 import {FirebaseAuth, FirebaseRef, AuthProviders, AuthMethods } from 'angularfire2';
 
-@Page({
+@Component({
     templateUrl: 'build/pages/login/login.html'
 })
 export class LoginPage {
@@ -12,7 +12,7 @@ export class LoginPage {
     constructor(public auth: FirebaseAuth,
         @Inject(FirebaseRef) public ref: Firebase,
         public viewCtrl: ViewController) { }
-    /** 
+    /**
      * this will dismiss the modal page
      */
     dismiss() {
@@ -20,11 +20,11 @@ export class LoginPage {
     }
 
     /**
-     * this create in the user using the form credentials. 
+     * this create in the user using the form credentials.
      *
-     * we are preventing the default behavor of submitting 
+     * we are preventing the default behavor of submitting
      * the form
-     * 
+     *
      * @param _credentials {Object} the email and password from the form
      * @param _event {Object} the event information from the form submit
      */
@@ -43,10 +43,10 @@ export class LoginPage {
             console.log(error)
         });
     }
-    
+
     registerUserWithGitHub(_credentials, _event) {
         _event.preventDefault();
-        
+
         this.auth.login({
             provider: AuthProviders.Github,
             method: AuthMethods.Popup
@@ -57,8 +57,8 @@ export class LoginPage {
             console.log(error)
         });
     }
-    
-    
+
+
     registerUserWithGoogle(_credentials, _event) {
         _event.preventDefault();
         debugger;
@@ -74,17 +74,17 @@ export class LoginPage {
     }
     /**
      * this logs in the user using the form credentials.
-     * 
+     *
      * if the user is a new user, then we need to create the user AFTER
      * we have successfully logged in
-     * 
+     *
      * @param _credentials {Object} the email and password from the form
      * @param _event {Object} the event information from the form submit
      */
     login(credentials, _event) {
         _event.preventDefault();
 
-        // if this was called from the register user,  the check if we 
+        // if this was called from the register user,  the check if we
         // need to create the user object or not
         let addUser = credentials.created
         credentials.created = null;

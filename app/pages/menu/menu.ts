@@ -1,10 +1,10 @@
 import {Modal, NavController, Page, ViewController} from 'ionic-angular';
-import {OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/common';
 //Note ViewController is used when there  is modal, alert there to dismiss the view.
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/menu/menu.html'
 })
 export class MenuPage implements OnInit {

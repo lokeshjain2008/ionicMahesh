@@ -1,13 +1,14 @@
-import {Page, Alert, Loading, NavController} from 'ionic-angular';
+import {Alert, Loading, NavController} from 'ionic-angular';
 
+import { Component} from '@angular/core';
 import {HomePage} from '../home/home';
-
 import { MenuPage }  from '../menu/menu';
 
 
-@Page({
+@Component({
   templateUrl: 'build/pages/getting-started/getting-started.html'
 })
+
 export class GettingStartedPage {
   constructor(private nav: NavController) {
 

@@ -1,35 +1,34 @@
-import {ViewChild} from '@angular/core';
-import {App, Platform, Nav} from 'ionic-angular';
+import {ViewChild, Component} from '@angular/core';
+import {Platform, Nav, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {ListPage} from './pages/list/list';
 
 import {
-    FIREBASE_PROVIDERS, defaultFirebase,
-    AngularFire, firebaseAuthConfig, AuthProviders,
-    AuthMethods
+  FIREBASE_PROVIDERS, defaultFirebase,
+  AngularFire, firebaseAuthConfig, AuthProviders,
+  AuthMethods
 } from 'angularfire2';
 
 
-@App({
+@Component({
   templateUrl: 'build/app.html',
-  config: {}, // http://ionicframework.com/docs/v2/api/config/Config/,
   providers: [
-        FIREBASE_PROVIDERS,
-        defaultFirebase('https://maheshkidukaan.firebaseio.com/'), 
-        firebaseAuthConfig({
-            provider: AuthProviders.Password,
-            method: AuthMethods.Password,
-            remember: 'default',
-            scope: ['email']
-        })
-    ],
+    FIREBASE_PROVIDERS,
+    defaultFirebase('https://maheshkidukaan.firebaseio.com/'),
+    firebaseAuthConfig({
+      provider: AuthProviders.Password,
+      method: AuthMethods.Password,
+      remember: 'default',
+      scope: ['email']
+    })
+  ],
 })
 class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = GettingStartedPage;
-  pages: Array<{title: string, component: any}>
+  pages: Array<{ title: string, component: any }>
 
   constructor(private platform: Platform) {
     this.initializeApp();
@@ -56,3 +55,5 @@ class MyApp {
     this.nav.setRoot(page.component);
   }
 }
+
+ionicBootstrap(MyApp)

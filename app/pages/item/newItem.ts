@@ -2,7 +2,7 @@ import {Modal, NavController, Page, ViewController, NavParams} from 'ionic-angul
 import {Component, OnInit, Inject} from '@angular/core';
 import { FirebaseRef } from 'angularfire2';
 
-@Page({
+@Component({
     templateUrl: 'build/pages/item/newItem.html'
 })
 

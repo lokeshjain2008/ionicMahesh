@@ -56,10 +56,7 @@ type User {
   profileImageURL: String,
   displayName: String,
   userId: String,
-  role: String,
-  validate(){
-    this.role == null
-  }
+
 }
 
 path /users {
@@ -99,14 +96,11 @@ path /canteen  is Canteen{
 type Order{
   items: Menu[],
   amount: Number,
+  status: Number
 }
 
 type UserOrder{
-  totalAmount: Number,
-  userId: String,
-  displayName: String,
-  profileImageURL: String,
-  email: String,
+  amount: Number,
   orders: Order[]
 }
 

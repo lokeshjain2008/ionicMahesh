@@ -1,4 +1,4 @@
-import {Modal, NavController, Page} from 'ionic-angular';
+import {Modal, NavController} from 'ionic-angular';
 import {Component, OnInit, Inject} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {LoginPage} from '../login/login'
@@ -6,7 +6,8 @@ import {NewItemModal} from '../item/newItem';
 // import {MomentDate} from '../../lib/MomentDate'
 import {OrderPage} from '../order/order';
 
-import {User} from '../../models';
+import {UserModel} from '../../models';
+
 
 import 'rxjs';
 
@@ -14,7 +15,7 @@ import 'rxjs';
 
 import {FirebaseAuth, AuthProviders, AuthMethods, FirebaseRef, AngularFire } from 'angularfire2';
 
-@Page({
+@Component({
     templateUrl: 'build/pages/home/home.html',
     pipes: [
         // MomentDate
@@ -23,7 +24,8 @@ import {FirebaseAuth, AuthProviders, AuthMethods, FirebaseRef, AngularFire } fro
 export class HomePage implements OnInit {
     textItems: Observable<any[]>;
     usersWithMessages: Observable<any[]>;
-    authInfo: any
+    authInfo: any;
+    userData: User;
 
     constructor(
         @Inject(FirebaseRef) public ref: Firebase,
@@ -47,19 +49,18 @@ export class HomePage implements OnInit {
                     this.authInfo = data.twitter
                     this.authInfo.displayName = data.twitter.displayName
                 } else if (data.google) {
-                    this.authInfo = data.google
+                    this.authInfo = data.google;
                     this.authInfo.userId = data.uid;
-                    this.authInfo.displayName = data.google.displayName
+                    this.authInfo.displayName = data.google.displayName;
                     //Create user to save into database
-                    let userData: User = {
+                    this.userData = {
                         email: data.google.email,
                         displayName: data.google.displayName,
                         userId: data.google.userId,
                         profileImageURL: data.google.profileImageURL,
-                        role: null
                     };
 
-                    this.ref.child("users").child(data.uid).update(userData);
+                    this.ref.child("users").child(data.uid).update(this.userData);
 
                 } else {
                     this.authInfo = data.password
@@ -105,8 +106,8 @@ export class HomePage implements OnInit {
     }
 
 
-    goToOrderPage(){
-        this._nav.push(OrderPage, {userId:this.authInfo.userId});
+    goToOrderPage() {
+        this._nav.push(OrderPage, { userData: this.userData });
     }
 
     /**

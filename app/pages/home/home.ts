@@ -25,7 +25,7 @@ export class HomePage implements OnInit {
     textItems: Observable<any[]>;
     usersWithMessages: Observable<any[]>;
     authInfo: any;
-    userData: User;
+    userData: UserModel;
 
     constructor(
         @Inject(FirebaseRef) public ref: Firebase,

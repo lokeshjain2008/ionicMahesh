@@ -8,3 +8,5 @@ plugins/
 *.swp
 .DS_Store
 Thumbs.db
+maheIonicMobile.sublime-project
+maheIonicMobile.sublime-workspace

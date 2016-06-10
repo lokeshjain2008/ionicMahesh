@@ -1,0 +1,171 @@
+{
+  "menu" : {
+    "-KJ_wponNhSX5YJZ8lnz" : {
+      "desc" : "Base",
+      "name" : "roti",
+      "price" : 5
+    },
+    "-KJoPrsJfdNi3WGfnaWc" : {
+      "desc" : "None",
+      "name" : "Daal",
+      "price" : 20
+    },
+    "-KJoPv7B8BOwT7ZeHbOp" : {
+      "desc" : "My fav.",
+      "name" : "paneer",
+      "price" : 50
+    },
+    "-KJti-MD93e3TLfy_vwF" : {
+      "desc" : "sabji",
+      "name" : "sabji",
+      "price" : 30
+    }
+  },
+  "orders" : {
+    "google:103915386258147924701" : {
+      "items" : {
+        "-KJjSX_3dXUNMGLlGTKA" : {
+          "desc" : "Base",
+          "name" : "roti",
+          "price" : 5
+        },
+        "-KJjSmTg-iiubZN8tPHy" : {
+          "desc" : "Base",
+          "name" : "roti",
+          "price" : 5
+        }
+      },
+      "totalAmount" : 0,
+      "userId" : "google:103915386258147924701"
+    },
+    "google:107052245198159918163" : {
+      "totalAmount" : 0,
+      "userId" : "google:107052245198159918163"
+    },
+    "google:116068349236349761960" : {
+      "totalAmount" : 0,
+      "userId" : "google:116068349236349761960"
+    }
+  },
+  "textItems" : {
+    "-KJZFVCe6uhkWwMs3ACo" : {
+      "description" : "this is useless like me",
+      "timestamp" : 1465192161755,
+      "title" : "use less data",
+      "user" : "lokeshjain2008@gmail.com"
+    },
+    "-KJZFacrqdpjOqBqsBQy" : {
+      "description" : "This is based on the observable",
+      "timestamp" : 1465192188074,
+      "title" : "More data",
+      "user" : "lokeshjain2008@gmail.com"
+    },
+    "-KJ_J_LgovAAUncqhNT1" : {
+      "description" : "VG zvh",
+      "timestamp" : 1465209999376,
+      "title" : "By sv",
+      "user" : "lokeshjain2008@gmail.com"
+    }
+  },
+  "user-orders" : {
+    "google:116068349236349761960" : {
+      "orders" : {
+        "-KJouw_hQwK5009_qRY9" : {
+          "amount" : 75,
+          "items" : [ {
+            "desc" : "My fav.",
+            "name" : "paneer",
+            "price" : 50
+          }, {
+            "desc" : "Base",
+            "name" : "roti",
+            "price" : 5
+          }, {
+            "desc" : "None",
+            "name" : "Daal",
+            "price" : 20
+          } ],
+          "orderStatus" : 22
+        }
+      },
+      "total" : 100
+    }
+  },
+  "users" : {
+    "0a2ba189-e39e-4b0f-a2f3-1b0dd24c9578" : {
+      "authData" : {
+        "auth" : {
+          "provider" : "password",
+          "token" : {
+            "auth_time" : 1464780118,
+            "email" : "lokeshj@gmail.com",
+            "email_verified" : false,
+            "exp" : 1464781318,
+            "firebase" : {
+              "identities" : {
+                "email" : [ "lokeshj@gmail.com" ]
+              }
+            },
+            "iat" : 1464780118,
+            "sub" : "0a2ba189-e39e-4b0f-a2f3-1b0dd24c9578"
+          },
+          "uid" : "0a2ba189-e39e-4b0f-a2f3-1b0dd24c9578"
+        },
+        "expires" : 1464781318,
+        "password" : {
+          "displayName" : "lokeshj@gmail.com",
+          "email" : "lokeshj@gmail.com",
+          "isTemporaryPassword" : false,
+          "profileImageURL" : "https://secure.gravatar.com/avatar/3bbea90ce710e45ec6f977dfb30a35ab?d=retro"
+        },
+        "provider" : 4,
+        "uid" : "0a2ba189-e39e-4b0f-a2f3-1b0dd24c9578"
+      },
+      "avatar" : "https://secure.gravatar.com/avatar/3bbea90ce710e45ec6f977dfb30a35ab?d=retro",
+      "displayName" : "lokeshj@gmail.com",
+      "provider" : 4,
+      "role" : "father"
+    },
+    "google:103915386258147924701" : {
+      "displayName" : "Prasad Chandrashekar",
+      "email" : "prasad.chandrashekar@reachlocal.com",
+      "name" : "Prasad Chandrashekar",
+      "profileImageURL" : "https://lh3.googleusercontent.com/-sxbhpxoWJpw/AAAAAAAAAAI/AAAAAAAAAAA/zrCUpFjMTsU/photo.jpg",
+      "provider" : 3,
+      "role" : "father",
+      "userId" : "google:103915386258147924701"
+    },
+    "google:107052245198159918163" : {
+      "displayName" : "Lokesh Jain",
+      "email" : "lokesh.jain@reachlocal.com",
+      "profileImageURL" : "https://lh3.googleusercontent.com/-E4blmSzsR4E/AAAAAAAAAAI/AAAAAAAAAAA/vE4FBlxhLYE/photo.jpg",
+      "userId" : "google:107052245198159918163"
+    },
+    "google:116068349236349761960" : {
+      "displayName" : "lokesh jain",
+      "email" : "lokeshjain2008@gmail.com",
+      "name" : "lokesh jain",
+      "profileImageURL" : "https://lh6.googleusercontent.com/-FYeVJSR321w/AAAAAAAAAAI/AAAAAAAAAb8/YqGnSCQSWIQ/photo.jpg",
+      "provider" : 3,
+      "role" : "father",
+      "userId" : "google:116068349236349761960"
+    }
+  },
+  "tables": [
+  {
+    "name": "Table 1",
+    "chairs": 4
+  },
+  {
+    "name": "Table 2",
+    "chairs": 4
+  }],
+  "reservations": [
+    {
+      "table": "Table 1",
+      "person": "Prasad C",
+      "start": 123456789,
+      "end": 0
+    }
+  ]
+}

@@ -150,6 +150,14 @@
     "settings": {
       ".validate": "newData.child('message').val().length <= 140",
       ".write": "data.child('readOnly').val() == 1"
+    },
+    "tables": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "reservations": {
+      ".read": "auth != null",
+      ".write": "auth != null"
     }
   }
 }

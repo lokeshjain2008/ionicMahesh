@@ -1,0 +1,41 @@
+<ion-navbar *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Tables</ion-title>
+</ion-navbar>
+
+<ion-content>
+  <div class="spinner">
+    <ion-spinner [hidden]="!showSpinner"></ion-spinner>
+  </div>
+  <ion-list>
+    <ion-row class="login-info">
+      <ion-col offset-50 width-50 style="margin-top:8px">
+          <div *ngIf="auth | async">
+            <span>{{authInfo && authInfo.displayName}}
+            <ion-icon class="person" *ngIf="auth | async" isActive="true" name="person-outline"></ion-icon>
+            </span>
+          </div>         
+          <div *ngIf="!(auth | async)">Please log in</div>
+      </ion-col>
+    </ion-row>
+    <ion-item *ngFor="let table of tables">
+      <ion-avatar item-left>
+        <ion-icon [hidden]="!istableAvailable(table)" isActive="false" name="checkmark-circle"></ion-icon>
+        <ion-icon [hidden]="istableAvailable(table)" isActive="false" name="close-circle"></ion-icon>
+      </ion-avatar>
+      <h2>{{table.name}}</h2>
+      <h3 [hidden]="!istableAvailable(table)">Seating capacity for {{table.chairs}}.</h3>
+      <!-- #todo replace with reservaion status -->
+      <h3 danger [hidden]="istableAvailable(table)">{{ reservationStatus(table) }}</h3>
+      
+      <button [hidden]="!istableAvailable(table)" item-right small
+              (click)="reserveTable(table)">Reserve</button>
+
+      <button [hidden]="istableAvailable(table)" item-right secondary
+              (click)="releaseTable(table)">Done</button>
+
+    </ion-item>
+  </ion-list>
+</ion-content>

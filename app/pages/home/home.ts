@@ -10,9 +10,7 @@ import {UserModel} from '../../models';
 
 
 import 'rxjs';
-
-
-
+import {Firebase} from 'firebase';
 import {FirebaseAuth, AuthProviders, AuthMethods, FirebaseRef, AngularFire } from 'angularfire2';
 
 @Component({

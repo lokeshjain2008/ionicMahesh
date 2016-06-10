@@ -2,6 +2,7 @@ import {Modal, NavController, ViewController} from 'ionic-angular';
 import {Component, OnInit, Inject} from '@angular/core';
 import {FirebaseAuth, FirebaseRef, AuthProviders, AuthMethods } from 'angularfire2';
 
+
 @Component({
     templateUrl: 'build/pages/login/login.html'
 })

@@ -2,9 +2,6 @@
 
 isSelfData(id){ auth != null && auth.uid == id}
 isLoggedIn() {  auth != null}
-//isBaap() { auth!=null &&
-//  auth.uid == 'google:116068349236349761960'
-//  }
 isFather(){
   auth!=null && prior(root).child('users').child(auth.uid).child('role').val() == 'father';
 }
@@ -23,30 +20,15 @@ type Menu{
 }
 
 path /menu {
-
   read(){
     isLoggedIn();
   }
   write(){
     isFather();
   }
-
 }
 // All individual Posts are writable by anyone.
 path /menu/{id} is Menu {
-
-  //read() {
-  //	isFather();
-  //}
-  //create(){
-  //	isLoggedIn()
-  //}
-  //update(){
-  //	isLoggedIn()
-  //}
-  //delete(){
-  //	isSelfData(id)
-  //}
 }
 
 
@@ -104,17 +86,6 @@ type UserOrder{
   orders: Order[]
 }
 
-path /orders {
-  write() {
-    isFather()
-  }
-
-  read() {
-    isFather()
-  }
-
-}
-
 path /user-orders {
   read(){
     isFather()
@@ -134,35 +105,25 @@ path /user-orders/{userId} is UserOrder{
 }
 
 
-path /orders/{order} is Order{
-  read() {
-    auth != null &&
-    this.$order == auth.uid
-  }
-
-  write() {
-    isLoggedIn();
-  }
-
-}
-
-//Testing with the rules
-
-path /textItems {
+path /tables {
   read(){
     true;
   }
   write(){
-    isLoggedIn();
+    true;
   }
 }
 
-path /settings {
-	validate(){ this.message.length <= 140}
-	write(){
-		data.child('readOnly').val() == 1
-	}
+path /reservations {
+  read(){
+    true;
+  }
+  write(){
+    true;
+  }
 }
+
+
 
 // See this https://github.com/firebase/bolt/blob/master/docs/language.md
 //

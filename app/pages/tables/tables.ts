@@ -1,6 +1,6 @@
-import { Page, NavController, Modal } from 'ionic-angular';
+import {NavController, Modal } from 'ionic-angular';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable, FirebaseAuth } from 'angularfire2';
-import {OnInit} from '@angular/core';
+import {OnInit,Component} from '@angular/core';
 
 import {LoginPage} from '../login/login'
 import {Table} from './table';
@@ -10,7 +10,7 @@ import {Reservation} from './reservation';
 import {ReserveTableModal} from './reserve.modal';
 
 
-@Page({
+@Component({
   templateUrl: 'build/pages/tables/tables.html',
   styles: [`
     ion-avatar > ion-icon {
@@ -46,7 +46,7 @@ export class TablesPage implements OnInit{
               public auth: FirebaseAuth) {
     this.tables = [];
   }
-  
+
   ngOnInit(){
     // Loading.
     this.showSpinner = true;
@@ -72,7 +72,7 @@ export class TablesPage implements OnInit{
             this.authInfo = null
             this.displayLoginModal()
         }
-    })    
+    })
 
     this.afb.database.list('/reservations').subscribe((data) => {
       this.reservations = data;
@@ -88,9 +88,9 @@ export class TablesPage implements OnInit{
   reservationStatus(table){
     let status = '';
     let rElement = this.reservations.filter((rElement) => {
-      return table.name === rElement.table; 
+      return table.name === rElement.table;
     })[0];
-    
+
     if (rElement) {
       status = `Reserved By ${rElement.person}`;
     }
@@ -99,9 +99,9 @@ export class TablesPage implements OnInit{
   }
 
   istableAvailable(table){
-    let filteredElement; 
+    let filteredElement;
     filteredElement = this.reservations.filter((rElement) => {
-      return ((!rElement.end) && (table.name === rElement.table)); 
+      return ((!rElement.end) && (table.name === rElement.table));
     })[0];
     return !filteredElement;
   }
@@ -112,9 +112,9 @@ export class TablesPage implements OnInit{
      "table": table.name,
      "person": "XYZ",
      "start": Date.now(),
-     "end": 0 
+     "end": 0
    };
-   this.reservations.map((element) => { delete element['$key']});   
+   this.reservations.map((element) => { delete element['$key']});
    this.reservations.push(reservationObj);
    this.afb.database.object('/reservations').set(this.reservations);
    // Display the Modal
@@ -127,7 +127,7 @@ export class TablesPage implements OnInit{
     let reservationObj = this.reservations.filter((rElement) => { return rElement.table === table.name }).sort((a, b) => {
       return a.start - b.start;
     }).pop();
-    
+
     let key = reservationObj['$key'];
     delete reservationObj['$key'];
     reservationObj.end = Date.now();

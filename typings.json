@@ -4,5 +4,8 @@
   "ambientDependencies": {
     "es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654",
     "firebase": "registry:dt/firebase#73fa26213aa5d2e1de5d7c2cc74118108cb2e5fa"
+  },
+  "globalDependencies": {
+    "firebase": "registry:dt/firebase#2.4.1+20160412125105"
   }
 }

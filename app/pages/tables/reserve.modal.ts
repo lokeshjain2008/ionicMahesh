@@ -1,7 +1,9 @@
-import {Page, ViewController, NavParams} from 'ionic-angular';
+import { ViewController, NavParams} from 'ionic-angular';
 import {Table} from './table';
+import {Component} from '@angular/core';
 
-@Page({
+
+@Component({
   template: `
   <ion-content padding>
     <ion-card>
@@ -26,9 +28,9 @@ import {Table} from './table';
 })
 
 export class ReserveTableModal {
-  
+
   table:Table;
-  
+
   constructor(
     private viewCtrl: ViewController,
     private params: NavParams) {

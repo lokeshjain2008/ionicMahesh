@@ -62,41 +62,6 @@
       ".read": "true",
       ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'"
     },
-    "orders": {
-      ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
-      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
-      "$order": {
-        ".validate": "newData.hasChildren(['amount', 'status'])",
-        "items": {
-          "$key2": {
-            ".validate": "newData.hasChildren(['name', 'price', 'desc']) && newData.child('name').val() != null && newData.child('price').val() > 0 && newData.child('desc').val().length <= 140",
-            "name": {
-              ".validate": "newData.isString()"
-            },
-            "price": {
-              ".validate": "newData.isNumber()"
-            },
-            "desc": {
-              ".validate": "newData.isString()"
-            },
-            "$other": {
-              ".validate": "false"
-            }
-          }
-        },
-        "amount": {
-          ".validate": "newData.isNumber()"
-        },
-        "status": {
-          ".validate": "newData.isNumber()"
-        },
-        "$other": {
-          ".validate": "false"
-        },
-        ".read": "auth != null && data.child('$order').val() == auth.uid",
-        ".write": "auth != null"
-      }
-    },
     "user-orders": {
       ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
       ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
@@ -143,21 +108,13 @@
         ".write": "auth != null && auth.uid == $userId"
       }
     },
-    "textItems": {
-      ".read": "true",
-      ".write": "auth != null"
-    },
-    "settings": {
-      ".validate": "newData.child('message').val().length <= 140",
-      ".write": "data.child('readOnly').val() == 1"
-    },
     "tables": {
-      ".read": "auth != null",
-      ".write": "auth != null"
+      ".read": "true",
+      ".write": "true"
     },
     "reservations": {
-      ".read": "auth != null",
-      ".write": "auth != null"
+      ".read": "true",
+      ".write": "true"
     }
   }
 }

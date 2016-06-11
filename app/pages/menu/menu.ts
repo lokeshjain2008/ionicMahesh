@@ -1,6 +1,9 @@
 import {Modal, NavController, Page, ViewController} from 'ionic-angular';
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/common';
+
+import {MenuModel} from '../../models';
+
 //Note ViewController is used when there  is modal, alert there to dismiss the view.
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
@@ -9,7 +12,7 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 })
 export class MenuPage implements OnInit {
   menuItems: FirebaseListObservable<Object>;
-  newItem: Object:MenuModel = {};
+  newItem: MenuModel = {}; //ignore for now, don't how to set this here. error is valid
 
   constructor(private nav: NavController, private af: AngularFire) {
 
@@ -28,6 +31,7 @@ export class MenuPage implements OnInit {
   }
 
   addUsingObject(){
+    console.log(this.newItem);
     this.newItem.price = +this.newItem.price;
     this.menuItems.push(this.newItem);
     //this.newItem = {};

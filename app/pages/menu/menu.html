@@ -61,6 +61,14 @@
         [(ngModel)]="newItem.desc"
          ngControl="desc"></ion-input>
     </ion-item>
+
+    <ion-item>
+        <ion-label>Available</ion-label>
+        <ion-checkbox required
+        [(ngModel)]="newItem.available"
+         ngControl="available">
+         </ion-checkbox>
+    </ion-item>
     <div padding>
         <button block type="submit" [disabled]="!modelData.valid">Add New Item</button>
         <button block (click)="cancelItem($event)">Cancel</button>

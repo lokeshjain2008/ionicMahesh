@@ -6,12 +6,11 @@ export interface UserModel{
   role?: string,
 }
 
-export interface MenuModel{
+export interface MenuModel extends Object{
 	price: number,
 	name: string,
 	desc: string,
 	available: boolean
-
 }
 
 

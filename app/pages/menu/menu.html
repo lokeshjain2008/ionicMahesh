@@ -8,28 +8,59 @@
 
 <ion-content>
 
-    <div *ngFor="let item of menuItems | async">
-        <ion-card>
-            <ion-header>  {{ item.name}} - {{ item.price}} </ion-header>
-            <ion-content> {{ item.desc}} </ion-content>
-        </ion-card>
-    </div>
 
 
-    <form #modelData="ngForm" (submit)="addTheItem(modelData)">
+
+
+    <ion-list>
+        <ion-spinner [hidden]="(menuItems |async)?.length" icon="lines"></ion-spinner>
+        <ion-item *ngFor="let item of menuItems | async">
+            <ion-checkbox [checked]="item.available"
+            (click)="changeAvailibility(item)"
+            ></ion-checkbox>
+
+            <ion-label>
+                <strong>  {{ item.name}} </strong>
+
+            </ion-label>
+            <ion-badge item-right>{{ item.price}}/-</ion-badge>
+            <button  item-right small round clear primary
+            (click)="editItem(item)"
+            >Edit
+            </button>
+            <button  item-right small round clear danger
+            (click)="delteItem(item)"
+            >Delete
+            </button>
+            <p>
+                <small>{{item.desc}}</small>
+            </p>
+        </ion-item>
+    </ion-list>
+
+    <!-- (submit)="addTheItem(modelData)" -->
+    <form #modelData="ngForm"
+
+        (submit)="addUsingObject()"
+    >
     <ion-item>
         <ion-label>Title</ion-label>
-        <ion-input required type="text" ngControl="name"></ion-input>
+        <ion-input required type="text"
+        [(ngModel)]="newItem.name"
+         ngControl="name"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label> Price </ion-label>
-        <ion-input required type="number" ngControl="price"></ion-input>
+        <ion-input required type="number"
+        [(ngModel)]="newItem.price"
+         ngControl="price"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label>Description</ion-label>
-        <ion-input required type="text" ngControl="desc"></ion-input>
+        <ion-input required type="text"
+        [(ngModel)]="newItem.desc"
+         ngControl="desc"></ion-input>
     </ion-item>
-
     <div padding>
         <button block type="submit" [disabled]="!modelData.valid">Add New Item</button>
         <button block (click)="cancelItem($event)">Cancel</button>

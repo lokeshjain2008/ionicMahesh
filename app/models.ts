@@ -6,6 +6,14 @@ export interface UserModel{
   role?: string,
 }
 
+export interface MenuModel{
+	price: number,
+	name: string,
+	desc: string,
+	available: boolean
+
+}
+
 
 export enum OrderStatusEnum{
 	"created",
@@ -17,5 +25,5 @@ export enum OrderStatusEnum{
 export interface OrderModel{
 	items: any[],
 	amount: number,
-	orderStatus: OrderStatusEnum
+	status: OrderStatusEnum
 }

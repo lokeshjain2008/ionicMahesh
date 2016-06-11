@@ -11,6 +11,7 @@ type Menu{
 	name: String,
   price: Number,
 	desc: String,
+  available: Boolean
 
 	validate(){
     this.name != null &&
@@ -119,6 +120,25 @@ path /reservations {
     true;
   }
   write(){
+    true;
+  }
+}
+
+
+path /current-orders {
+  read() {
+    isFather();
+  }
+  write() {
+    isFather();
+  }
+}
+
+
+//Test data
+
+path /textItems {
+  read() {
     true;
   }
 }

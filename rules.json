@@ -4,7 +4,7 @@
       ".read": "auth != null",
       ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
       "$id": {
-        ".validate": "newData.hasChildren(['name', 'price', 'desc']) && newData.child('name').val() != null && newData.child('price').val() > 0 && newData.child('desc').val().length <= 140",
+        ".validate": "newData.hasChildren(['name', 'price', 'desc', 'available']) && newData.child('name').val() != null && newData.child('price').val() > 0 && newData.child('desc').val().length <= 140",
         "name": {
           ".validate": "newData.isString()"
         },
@@ -13,6 +13,9 @@
         },
         "desc": {
           ".validate": "newData.isString()"
+        },
+        "available": {
+          ".validate": "newData.isBoolean()"
         },
         "$other": {
           ".validate": "false"
@@ -75,7 +78,7 @@
             ".validate": "newData.hasChildren(['amount', 'status'])",
             "items": {
               "$key2": {
-                ".validate": "newData.hasChildren(['name', 'price', 'desc']) && newData.child('name').val() != null && newData.child('price').val() > 0 && newData.child('desc').val().length <= 140",
+                ".validate": "newData.hasChildren(['name', 'price', 'desc', 'available']) && newData.child('name').val() != null && newData.child('price').val() > 0 && newData.child('desc').val().length <= 140",
                 "name": {
                   ".validate": "newData.isString()"
                 },
@@ -84,6 +87,9 @@
                 },
                 "desc": {
                   ".validate": "newData.isString()"
+                },
+                "available": {
+                  ".validate": "newData.isBoolean()"
                 },
                 "$other": {
                   ".validate": "false"
@@ -115,6 +121,13 @@
     "reservations": {
       ".read": "true",
       ".write": "true"
+    },
+    "current-orders": {
+      ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
+      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'"
+    },
+    "textItems": {
+      ".read": "true"
     }
   }
 }

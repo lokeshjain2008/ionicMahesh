@@ -3,16 +3,19 @@ import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/common';
 
 import {MenuModel} from '../../models';
+//directives
+import {MenuItem} from '../../components/menu-item/menu-item';
 
 //Note ViewController is used when there  is modal, alert there to dismiss the view.
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
-  templateUrl: 'build/pages/menu/menu.html'
+  templateUrl: 'build/pages/menu/menu.html',
+  directives: [MenuItem]
 })
 export class MenuPage implements OnInit {
   menuItems: FirebaseListObservable<Object>;
-  newItem: MenuModel = {}; //ignore for now, don't how to set this here. error is valid
+  newItem: MenuModel = new MenuModel; //ignore for now, don't how to set this here. error is valid
 
   constructor(private nav: NavController, private af: AngularFire) {
 
@@ -20,7 +23,6 @@ export class MenuPage implements OnInit {
 
   ngOnInit() {
     this.menuItems = this.af.database.list('/menu');
-
   }
 
   addTheItem(itemForm: NgForm) {
@@ -31,10 +33,17 @@ export class MenuPage implements OnInit {
   }
 
   addUsingObject(){
-    console.log(this.newItem);
     this.newItem.price = +this.newItem.price;
-    this.menuItems.push(this.newItem);
-    //this.newItem = {};
+    //This can be used to create new or update the menu Item.
+    if(this.newItem.$key) {
+      let key = this.newItem.$key;
+      delete this.newItem.$key;
+      this.menuItems.update( key, this.newItem);
+    }else{
+      this.menuItems.push(this.newItem);
+    }
+
+    this.newItem = new MenuModel;
   }
 
   resetForm(itemF: NgForm){
@@ -51,11 +60,20 @@ export class MenuPage implements OnInit {
   }
 
   editItem(item){
-    console.log("editing...");
+    this.newItem = item
   }
 
-  delteItem(item){
+  deleteItem(item){
     this.menuItems.remove(item.$key);
+  }
+
+  buttonText(item){
+    return item.$key !=null ? "Update Menu Item" : 'Add new menu Item'
+  }
+
+  cancelItem(event: Event) {
+    event.preventDefault();
+    this.newItem = new MenuModel();
   }
 
 

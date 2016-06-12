@@ -1,0 +1,38 @@
+<ion-item *ngIf="isFather">
+  <ion-checkbox [checked]="item.available"
+            (click)="availItem.emit(item)"
+            ></ion-checkbox>
+  <ion-label>
+      <strong>  {{ item.name}} </strong>
+      <p>
+        <small>{{item.desc}}</small>
+      </p>
+  </ion-label>
+  <ion-badge item-right>{{ item.price}}/-</ion-badge>
+  <button  item-right small round clear primary
+  (click)="editItem.emit(item)"
+  >Edit
+  </button>
+  <button  item-right small round clear danger
+  (click)="deleteItem.emit(item)"
+  >Delete
+  </button>
+</ion-item>
+
+
+<ion-item *ngIf="!isFather">
+   <h3>
+     <strong>
+     {{ item.name }}
+     </strong>
+     <p><small>{{ item.desc }}</small></p>
+   </h3>
+   <ion-badge item-right>{{ item.price}}/-</ion-badge>
+   {{indexCount}}
+   <button item-right clear large danger [hidden]="!inCart" (click)="orderItemIndex.emit(indexCount)">
+     <ion-icon name="remove-circle"></ion-icon>
+   </button>
+   <button item-right  clear large [hidden]="inCart" (click)="addItem.emit(item)">
+     <ion-icon name="add-circle" ></ion-icon>
+   </button>
+</ion-item>

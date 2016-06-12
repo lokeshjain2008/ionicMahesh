@@ -7,42 +7,30 @@
 
 
 <ion-content>
-
-
-
-
-
     <ion-list>
-        <ion-spinner [hidden]="(menuItems |async)?.length" icon="lines"></ion-spinner>
-        <ion-item *ngFor="let item of menuItems | async">
-            <ion-checkbox [checked]="item.available"
-            (click)="changeAvailibility(item)"
-            ></ion-checkbox>
-
-            <ion-label>
-                <strong>  {{ item.name}} </strong>
-
-            </ion-label>
-            <ion-badge item-right>{{ item.price}}/-</ion-badge>
-            <button  item-right small round clear primary
-            (click)="editItem(item)"
-            >Edit
-            </button>
-            <button  item-right small round clear danger
-            (click)="delteItem(item)"
-            >Delete
-            </button>
-            <p>
-                <small>{{item.desc}}</small>
-            </p>
-        </ion-item>
+      <ion-item [hidden]="(menuItems |async)?.length">
+        <ion-spinner icon="lines"></ion-spinner>
+      </ion-item>
+      <div *ngFor="let item of menuItems | async">
+        <menu-item [item]="item"
+        [isFather]="true"
+        (availItem)="changeAvailibility(item)"
+        (editItem)="editItem(item)"
+        (deleteItem)="deleteItem(item)"
+        ></menu-item>
+      </div>
     </ion-list>
 
     <!-- (submit)="addTheItem(modelData)" -->
+
     <form #modelData="ngForm"
 
         (submit)="addUsingObject()"
     >
+    <h4 padding>
+      Add/upate Menu Item
+    </h4>
+
     <ion-item>
         <ion-label>Title</ion-label>
         <ion-input required type="text"
@@ -70,7 +58,11 @@
          </ion-checkbox>
     </ion-item>
     <div padding>
-        <button block type="submit" [disabled]="!modelData.valid">Add New Item</button>
+        <button block type="submit" [disabled]="!modelData.valid"
+        [innerHtml]="buttonText(newItem)"
+        >
+        </button>
+
         <button block (click)="cancelItem($event)">Cancel</button>
     </div>
     <div padding>

@@ -6,11 +6,15 @@ export interface UserModel{
   role?: string,
 }
 
-export interface MenuModel extends Object{
-	price: number,
-	name: string,
-	desc: string,
-	available: boolean
+export class MenuModel {
+  price: number;
+  name: string;
+  desc: string;
+  available: boolean;
+
+  constructor (){
+    this.available = true;
+  }
 }
 
 

@@ -7,9 +7,11 @@ import 'rxjs/Rx';
 import {Loader} from '../../helpers/loader';
 import {UserModel, OrderStatusEnum, OrderModel} from '../../models'
 
+import {MenuItem} from '../../components/menu-item/menu-item';
 
 @Component({
-	templateUrl: "build/pages/order/order.html"
+	templateUrl: "build/pages/order/order.html",
+  directives: [MenuItem]
 })
 export class OrderPage implements OnInit {
 
@@ -67,9 +69,13 @@ export class OrderPage implements OnInit {
 	addToOrder(item) {
 		delete item.$key; // needed, to satify the data structure.
 		this.order.items.push(item);
-		this.order.amount = this.order.items.reduce((acc, item): number => { return acc + item.price }, 0);
-
+    this._calculateOrderAmount();
 	}
+
+  _calculateOrderAmount(){
+    this.order.amount = this.order.items.reduce((acc, item): number => { return acc + item.price }, 0);
+  }
+
 
 	pushOrder() {
 		if (this.order.amount) {
@@ -98,6 +104,11 @@ export class OrderPage implements OnInit {
 			.set(OrderStatusEnum.complete);
 	}
 
+  removeOrderItem(indexCount) {
+    console.log(indexCount);
+    this.order.items.splice(indexCount, 1);
+    this._calculateOrderAmount();
+  }
 
 
 }

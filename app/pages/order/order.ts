@@ -86,10 +86,11 @@ export class OrderPage implements OnInit {
 
 	pushOrder() {
 		if (this.order.amount) {
-			console.log(this.order);
 			this.userOrders.push(this.order).then((order) => {
 				//write Into current Order
 				order.once('value',(snap)=>{
+					let orderValue = snap.val();
+					orderValue.userId = this.userData.userId;
 					this.af.object(`current-orders/${snap.key()}`).set(snap.val());
 				})
 				.then((data)=>{
@@ -100,20 +101,27 @@ export class OrderPage implements OnInit {
 		}
 	}
 
-	processingOrder(order) {
-		this.af
-			.object(`${this.userOrdersPath}/${order.$key}/orderStatus`)
-			.set(OrderStatusEnum.Processing);
+	cancelOrder(order) {
+		let key = order.$key;
+		this.userOrders.remove(order.$key)
+		.then(()=>{
+			this.af.object(`current-orders/${key}`).remove();
+		},()=>{
+			console.log("Error happende");
+		})
+
 	}
 
 	completeOrder(order) {
 		this.af
-			.object(`${this.userOrdersPath}/${order.$key}/orderStatus`)
-			.set(OrderStatusEnum.complete);
+			.object(`${this.userOrdersPath}/${order.$key}/status`)
+			.set(OrderStatusEnum.complete)
+			.then(()=>{
+				this.af.object(`current-orders/${order.$key}`).remove();
+			});
 	}
 
   removeOrderItem(indexCount) {
-    console.log(indexCount);
     this.order.items.splice(indexCount, 1);
     this._calculateOrderAmount();
   }

@@ -18,9 +18,7 @@ type Menu{
     this.price >0 &&
     this.desc.length <=140;
   }
-  index(){
-    [this.available]
-  }
+
 }
 
 path /menu {
@@ -33,6 +31,9 @@ path /menu {
 }
 // All individual Posts are writable by anyone.
 path /menu/{id} is Menu {
+  index(){
+    ['available']
+  }
 }
 
 
@@ -83,9 +84,6 @@ type Order{
   items: Menu[],
   amount: Number,
   status: Number,
-  index(){
-    [this.status]
-  }
 }
 
 type UserOrder{
@@ -115,8 +113,12 @@ path /user-orders/{userId} is UserOrder{
   delete(){
     isSelfData($userId) && prior(this).status!=2
   }
-
+  //index(){ //how
+  //  ['orders/$key/order/status']
+  //}
 }
+
+
 
 
 path /tables {
@@ -138,12 +140,13 @@ path /reservations {
 }
 
 
+//UserId is need to reach the actual data and update
 path /current-orders {
   read() {
     isFather();
   }
-  write() {
-    isFather();
+  write(){
+    isLoggedIn();
   }
 }
 

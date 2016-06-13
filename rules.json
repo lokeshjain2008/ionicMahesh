@@ -19,7 +19,10 @@
         },
         "$other": {
           ".validate": "false"
-        }
+        },
+        ".indexOn": [
+          "available"
+        ]
       }
     },
     "users": {
@@ -110,8 +113,8 @@
         "$other": {
           ".validate": "false"
         },
-        ".read": "auth != null && auth.uid == $userId",
-        ".write": "auth != null && auth.uid == $userId"
+        ".write": "data.val() == null && (auth != null && auth.uid == $userId) || data.val() != null && newData.val() != null && (auth != null && auth.uid == $userId) && data.child('status').val() != 2 || data.val() != null && newData.val() == null && (auth != null && auth.uid == $userId) && data.child('status').val() != 2",
+        ".read": "auth != null && auth.uid == $userId"
       }
     },
     "tables": {
@@ -124,7 +127,7 @@
     },
     "current-orders": {
       ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
-      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'"
+      ".write": "auth != null"
     },
     "textItems": {
       ".read": "true"

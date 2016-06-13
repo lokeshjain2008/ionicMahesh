@@ -23,7 +23,7 @@ export class OrderPage implements OnInit {
 	order: OrderModel = { items: [], amount: 0, status: OrderStatusEnum.created };
 	loader: any;
 	statusValues = statusValues();
-
+	statusEnum = OrderStatusEnum;
 	userMainPath: string;
 	userOrdersPath: string;
 

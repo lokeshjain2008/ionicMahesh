@@ -33,11 +33,12 @@ export interface OrderModel{
 
 export function  statusValues(){
 	console.log(OrderStatusEnum);
-	return Object.keys(OrderStatusEnum).filter(Number).map(key => {
+	return Object.keys(OrderStatusEnum).map(i=>+i).filter(Number.isInteger).map(key => {
 		let obj = {
-			[key]:OrderStatusEnum[key]
+			value: key,
+			displayValue: OrderStatusEnum[key]
 		}
-		console.log(key);
+
 		return obj;
 	});
 }

@@ -18,6 +18,9 @@ type Menu{
     this.price >0 &&
     this.desc.length <=140;
   }
+  index(){
+    [this.available]
+  }
 }
 
 path /menu {
@@ -79,7 +82,10 @@ path /canteen  is Canteen{
 type Order{
   items: Menu[],
   amount: Number,
-  status: Number
+  status: Number,
+  index(){
+    [this.status]
+  }
 }
 
 type UserOrder{
@@ -100,9 +106,16 @@ path /user-orders/{userId} is UserOrder{
   read(){
     isSelfData($userId)
   }
-  write(){
+  create(){
     isSelfData($userId)
   }
+  update(){
+    isSelfData($userId) && prior(this).status!=2
+  }
+  delete(){
+    isSelfData($userId) && prior(this).status!=2
+  }
+
 }
 
 

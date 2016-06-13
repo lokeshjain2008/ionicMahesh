@@ -61,7 +61,7 @@ export class MenuPage implements OnInit {
   }
 
   editItem(item){
-    this.newItem = item
+    this.newItem = item;
   }
 
   deleteItem(item){

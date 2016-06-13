@@ -4,36 +4,33 @@
 
 <ion-content>
 
-	<ion-list>
-        Your Orders
-        <ion-item *ngFor="let order of userOrders | async">
-					Order of <ion-badge>{{ order.amount}}</ion-badge>
-					Staus<button ion-right clear disabled secondary>
-						OrderStatusEnum[order.status]
-					</button>
-					<div>
-						<ion-label>Change status</ion-label>
-				    <ion-select [(ngModel)]="order.status" [disabled]="order.status==2">
 
-				    </ion-select>
-
-						<small>Note: once done then you can't change the status of the order</small>
-						<br/>
-
-					</div>
-        </ion-item>
-    </ion-list>
-
-
+   <ion-card *ngFor="let order of userOrders | async">
+  	<ion-card-content>
+			<ion-item>
+				<ion-label>Order of <ion-badge>{{ order.amount}}</ion-badge>
+			</ion-label>
+		    <ion-select [(ngModel)]="order.status" [disabled]="order.status==2">
+					<ion-option *ngFor="let status of statusValues" [value]="status.value">
+						{{ status.displayValue }}
+					</ion-option>
+		    </ion-select>
+		    </ion-item>
+		    <p>
+				<small>Note: once done then you can't change the status of the order.</small>
+				</p>
+  	</ion-card-content>
+   </ion-card>
 
 	<ion-title>
 		Select menu
 	</ion-title>
 
-	<ion-list  *ngFor=" let item of menu | async">
-		<menu-item [item]="item" [isFather]="false" (addItem)="addToOrder(item)">
-			loading...
-		</menu-item>
+	<ion-list>
+		<div *ngFor=" let item of menu | async">
+			<menu-item [item]="item" [isFather]="false" (addItem)="addToOrder(item)">
+			</menu-item>
+		</div>
 	</ion-list>
 
   <ion-card>

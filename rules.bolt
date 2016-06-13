@@ -121,19 +121,19 @@ path /user-orders/{userId} is UserOrder{
 
 path /tables {
   read(){
-    true;
+    isLoggedIn();
   }
   write(){
-    true;
+    isFather();
   }
 }
 
 path /reservations {
   read(){
-    true;
+    isLoggedIn();
   }
   write(){
-    true;
+    auth!=null && ( auth.uid == this.child('userId').val() || prior(root).child('users').child(auth.uid).child('role').val() == 'father');
   }
 }
 

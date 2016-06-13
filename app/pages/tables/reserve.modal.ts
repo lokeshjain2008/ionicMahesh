@@ -11,7 +11,7 @@ import {Component} from '@angular/core';
         {{table.name}} Reservation Confirmed
       </ion-card-header>
       <ion-card-content>
-        Reservation of {{table.name}} is confirmed which can be occupied by {{table.chairs.length}} people.
+        Reservation of {{table.name}} is confirmed which can be occupied by {{table.chairs}} people.
       </ion-card-content>
       <button light round small (click)="close()" item-right>Close</button>
     </ion-card>

@@ -115,12 +115,12 @@
       }
     },
     "tables": {
-      ".read": "true",
-      ".write": "true"
+      ".read": "auth != null",
+      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'"
     },
     "reservations": {
-      ".read": "true",
-      ".write": "true"
+      ".read": "auth != null",
+      ".write": "auth != null && (auth.uid == newData.child('userId').val() || root.child('users').child(auth.uid).child('role').val() == 'father')"
     },
     "current-orders": {
       ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",

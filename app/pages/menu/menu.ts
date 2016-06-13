@@ -54,9 +54,10 @@ export class MenuPage implements OnInit {
     })
   }
 
-  changeAvailibility(item){
-    //Add availibity boolean to the data type
-    console.log("Availibility..");
+  changeAvailibility(event: Event,item: MenuModel){
+    item.available = !item.available;
+    this.newItem = item;
+    this.addUsingObject();// will update hurra!!!
   }
 
   editItem(item){

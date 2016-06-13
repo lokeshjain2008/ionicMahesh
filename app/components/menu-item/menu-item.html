@@ -1,9 +1,9 @@
 <ion-item *ngIf="isFather">
   <ion-checkbox [checked]="item.available"
-            (click)="availItem.emit(item)"
+            (click)="availItem.emit($event,item)"
             ></ion-checkbox>
   <ion-label>
-      <strong>  {{ item.name}} </strong>
+      <strong>{{ item.name}} </strong>
       <p>
         <small>{{item.desc}}</small>
       </p>

@@ -14,7 +14,7 @@
       <div *ngFor="let item of menuItems | async">
         <menu-item [item]="item"
         [isFather]="true"
-        (availItem)="changeAvailibility(item)"
+        (availItem)="changeAvailibility(event,item)"
         (editItem)="editItem(item)"
         (deleteItem)="deleteItem(item)"
         ></menu-item>

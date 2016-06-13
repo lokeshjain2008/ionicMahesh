@@ -5,7 +5,7 @@ import {FirebaseRef, AngularFire, FirebaseAuth, FirebaseDatabase, FirebaseListOb
 import 'rxjs/Rx';
 
 import {Loader} from '../../helpers/loader';
-import {UserModel, OrderStatusEnum, OrderModel} from '../../models'
+import {UserModel, OrderStatusEnum, OrderModel, statusValues} from '../../models'
 
 import {MenuItem} from '../../components/menu-item/menu-item';
 
@@ -22,6 +22,7 @@ export class OrderPage implements OnInit {
 	userOrders: FirebaseListObservable<any>;
 	order: OrderModel = { items: [], amount: 0, status: OrderStatusEnum.created };
 	loader: any;
+	statusValues = statusValues();
 
 	userMainPath: string;
 	userOrdersPath: string;
@@ -37,8 +38,14 @@ export class OrderPage implements OnInit {
 	}
 
 	ngOnInit() {
+		console.log(this.statusValues);
 		//Get menu
-		this.menu = this.af.list('menu');
+		this.menu = this.af.list('menu', {
+			query:{
+				orderByChild: 'available',
+				equalTo: true
+			}
+		});
 		//orders
     this.main = this.af.database.object(this.userMainPath)
     //create base skeleton to make data valid when we push to the orders
@@ -79,6 +86,7 @@ export class OrderPage implements OnInit {
 
 	pushOrder() {
 		if (this.order.amount) {
+			console.log(this.order);
 			this.userOrders.push(this.order).then((order) => {
 				//write Into current Order
 				order.once('value',(snap)=>{

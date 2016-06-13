@@ -2,8 +2,30 @@
 	Your orders
 </ion-navbar>
 
-
 <ion-content>
+
+	<ion-list>
+        Your Orders
+        <ion-item *ngFor="let order of userOrders | async">
+					Order of <ion-badge>{{ order.amount}}</ion-badge>
+					Staus<button ion-right clear disabled secondary>
+						OrderStatusEnum[order.status]
+					</button>
+					<div>
+						<ion-label>Change status</ion-label>
+				    <ion-select [(ngModel)]="order.status" [disabled]="order.status==2">
+
+				    </ion-select>
+
+						<small>Note: once done then you can't change the status of the order</small>
+						<br/>
+
+					</div>
+        </ion-item>
+    </ion-list>
+
+
+
 	<ion-title>
 		Select menu
 	</ion-title>
@@ -15,15 +37,19 @@
 	</ion-list>
 
   <ion-card>
-   <ion-card-header>
-   You cart   <ion-icon name="cart" item-left></ion-icon>
-   <ion-badge>
-    {{ order.amount }}
-   </ion-badge>
-   <button (click)="pushOrder()" secondary outline>
-      Create Order
-    </button>
-   </ion-card-header>
+
+   <ion-item>
+   	<strong>You cart </strong>
+   	<div item-right>
+	   <ion-icon name="cart" item-left></ion-icon>
+	   <ion-badge>
+	    {{ order.amount }}
+	   </ion-badge>
+	   <button (click)="pushOrder()" secondary outline [disabled]="!order.amount" >
+	      Create Order
+	    </button>
+	   </div>
+   </ion-item>
 
     <ion-list>
       <menu-item
@@ -37,23 +63,5 @@
     </ion-list>
 
   </ion-card>
-
-
-	<ion-card>
-		<ion-card-content>
-			Total{{ (main|async)?.total }}
-			<div>
-			{{ (main |async) |json  }}
-			</div>
-			<br>
-			Order:
-			{{ order | json }}
-
-		</ion-card-content>
-
-	</ion-card>
-
-
-
 
 </ion-content>

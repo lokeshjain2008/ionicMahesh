@@ -4,6 +4,7 @@ import { Component} from '@angular/core';
 import {HomePage} from '../home/home';
 import { MenuPage }  from '../menu/menu';
 
+import {OrderPage} from  '../order/order';
 
 @Component({
   templateUrl: 'build/pages/getting-started/getting-started.html'

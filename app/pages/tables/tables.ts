@@ -110,7 +110,8 @@ export class TablesPage implements OnInit{
     // logic for making reservation
    let reservationObj = {
      "table": table.name,
-     "person": "XYZ",
+     "person": this.authInfo.displayName,
+     "userId": this.authInfo.userId,
      "start": Date.now(),
      "end": 0
    };

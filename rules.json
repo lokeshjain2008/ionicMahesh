@@ -72,9 +72,9 @@
       ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
       ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'father'",
       "$userId": {
-        ".validate": "newData.hasChildren(['amount'])",
+        ".validate": "newData.hasChildren()",
         "amount": {
-          ".validate": "newData.isNumber()"
+          ".validate": "newData.isNumber() || newData.val() == null"
         },
         "orders": {
           "$key1": {

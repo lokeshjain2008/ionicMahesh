@@ -87,8 +87,9 @@ type Order{
 }
 
 type UserOrder{
-  amount: Number,
-  orders: Order[]
+  amount: Number | Null;
+  orders: Order[],
+
 }
 
 path /user-orders {

@@ -1,31 +1,14 @@
+<!--
+  Generated template for the OrderPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 <ion-navbar *navbar>
-	Your orders
+  <ion-title>Create Order</ion-title>
 </ion-navbar>
 
-<ion-content>
-
-
-   <ion-card *ngFor="let order of (userOrders | async)?.reverse()">
-  	<ion-card-content>
-			<ion-item>
-				Order of <ion-badge>{{ order.amount }}</ion-badge>
-				{{ statusEnum[order.status] }}
-			  <button (click)="cancelOrder(order)" danger small outline item-right
-			  *ngIf="order.status<=2"
-			  >
-			  	<ion-icon name="remove"> </ion-icon>
-			  </button>
-				<button (click)="completeOrder(order)" secondary small outline item-right
-				*ngIf="order.status<=2"
-				>
-					<ion-icon name="checkmark"> </ion-icon>
-				</button>
-		   </ion-item>
-		    <p>
-				<small>Note: once you mark <em>complete</em> order then you can't change the status of the order.</small>
-				</p>
-  	</ion-card-content>
-   </ion-card>
+<ion-content padding class="order">
 
 	<ion-title>
 		Select menu
@@ -65,5 +48,6 @@
     </ion-list>
 
   </ion-card>
+
 
 </ion-content>

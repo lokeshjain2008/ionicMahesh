@@ -118,13 +118,11 @@ path /user-orders/{userId} is UserOrder{
   //}
 }
 
-
-
-
 path /tables {
   read(){
     isLoggedIn();
   }
+
   write(){
     isFather();
   }

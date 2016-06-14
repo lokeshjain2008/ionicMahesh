@@ -6,6 +6,9 @@ import { MenuPage }  from '../menu/menu';
 
 import {OrderPage} from  '../order/order';
 
+
+import {UsersPage} from '../users/users';
+
 @Component({
   templateUrl: 'build/pages/getting-started/getting-started.html'
 })
@@ -34,7 +37,7 @@ export class GettingStartedPage {
 
 
   gotoMenuPage(){
-      this.nav.push(MenuPage);
+      this.nav.push(UsersPage);
   }
 
 }

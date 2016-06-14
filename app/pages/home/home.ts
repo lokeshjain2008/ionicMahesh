@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {LoginPage} from '../login/login'
 import {NewItemModal} from '../item/newItem';
 // import {MomentDate} from '../../lib/MomentDate'
-import {OrderPage} from '../order/order';
+import {OrdersPage} from '../orders/orders';
 
 import {UserModel} from '../../models';
 
@@ -105,7 +105,7 @@ export class HomePage implements OnInit {
 
 
     goToOrderPage() {
-        this._nav.push(OrderPage, { userData: this.userData });
+        this._nav.push(OrdersPage, { userData: this.userData });
     }
 
     /**

@@ -1,0 +1,47 @@
+<ion-navbar *navbar>
+	<ion-title>
+		Orders
+	</ion-title>
+	<ion-buttons end>
+	<ion-badge end>
+		Pending amount {{ (main |async)?.amount}}
+	</ion-badge>
+	</ion-buttons>
+</ion-navbar>
+
+<ion-content>
+	<ion-item>
+	<button secondary block large (click)="createOrder()" padding>
+		Create Order
+	</button>
+	</ion-item>
+
+   <ion-card *ngFor="let order of (userOrders | async)?.reverse()">
+  	<ion-card-content>
+			<ion-item>
+				Order of <ion-badge>{{ order.amount }}</ion-badge>
+				{{ statusEnum[order.status] }}
+			  <button (click)="cancelOrder(order)" danger small outline item-right
+			  *ngIf="order.status<2"
+			  >
+			  	<ion-icon name="remove"> </ion-icon>
+			  </button>
+				<button (click)="completeOrder(order)" secondary small outline item-right
+				*ngIf="order.status<2"
+				>
+					<ion-icon name="checkmark"> </ion-icon>
+				</button>
+				<ion-icon name="checkmark" [hidden]="order.status<2" item-right> </ion-icon>
+				<p>
+					<strong>Items- </strong>{{ displayOrderItems(order) }}
+				</p>
+		   </ion-item>
+		    <p *ngIf="order.status<2">
+					<small>Note: once you mark <em>complete</em> order then you can't undo. After order is complete then only pending amount will change.
+					</small>
+				</p>
+  	</ion-card-content>
+   </ion-card>
+
+
+</ion-content>

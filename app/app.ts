@@ -1,10 +1,13 @@
 import {ViewChild, Component} from '@angular/core';
 import {Platform, Nav, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
+
+
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {ListPage} from './pages/list/list';
-
 import {TablesPage} from './pages/tables/tables';
+
+import {HomePage} from './pages/home/home';
 
 import {
   FIREBASE_PROVIDERS, defaultFirebase,
@@ -29,7 +32,7 @@ import {
 class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = GettingStartedPage;
+  rootPage: any = HomePage;//GettingStartedPage;
   pages: Array<{ title: string, component: any }>
 
   constructor(private platform: Platform) {

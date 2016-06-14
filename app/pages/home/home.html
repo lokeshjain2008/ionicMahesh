@@ -18,17 +18,29 @@
                 <div *ngIf="!(auth | async)">Please log in</div>
             </ion-col>
             <ion-col width-20>
-                <button (click)="addNewItemClicked()">Add Item</button>
+                <button (click)="gotoPage(OrderPage)" [hidden]="isAdmin">Create Order</button>
             </ion-col>
         </ion-row>
     </ion-item>
 
-    <ion-item>
+
+    <ion-item *ngFor="let page of appPages">
+       <button block large (click)="gotoPage(page.component)">
+           {{page.name}}
+       </button>
+    </ion-item>
+
+    <ion-item [hidden]="appPages.length">
+        Preparing Dashboard... <ion-spinner icon="lines" padding></ion-spinner>
+    </ion-item>
+
+
+    <!-- <ion-item>
     <button secondary outline large round (click)="goToOrderPage()">
         Create Order
     </button>
     </ion-item>
-
+ -->
     <ion-card *ngFor="let item of textItems | async">
         <ion-card-header>
             {{item.title}}

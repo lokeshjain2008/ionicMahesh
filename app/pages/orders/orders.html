@@ -16,7 +16,14 @@
 	</button>
 	</ion-item>
 
+	<ion-item [hidden]="(userOrders |async)?.reverse()">
+    Getting Orders...<ion-spinner icon="lines" padding></ion-spinner>
+  </ion-item>
+
    <ion-card *ngFor="let order of (userOrders | async)?.reverse()">
+   	<ion-item [hidden]="order.amount">
+			<p>You haven't created any order yet. Create one.</p>
+		</ion-item>
   	<ion-card-content>
 			<ion-item>
 				Order of <ion-badge>{{ order.amount }}</ion-badge>

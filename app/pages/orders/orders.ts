@@ -43,13 +43,13 @@ export class OrdersPage implements OnInit {
 			if (!data) {
 				this.main.set({ amount: 0 });
 			}
-			this.userTotalAmount = data.amount || 0;
+			this.userTotalAmount = (data && data.amount) || 0;
     },
 			err => console.log(err),
 			() => console.log("Done"));
    	//No need for UserData to add will get it. From params.
    	this.userOrders = this.af.database.list(this.userOrdersPath,{query:{
-   		limitToLast: 20,
+   		limitToLast: 10,
    		orderByKey: true
    	}});
 

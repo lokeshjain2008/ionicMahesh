@@ -4,7 +4,16 @@ import {Observable} from 'rxjs/Observable';
 import {LoginPage} from '../login/login'
 import {NewItemModal} from '../item/newItem';
 // import {MomentDate} from '../../lib/MomentDate'
+
+//User pages
 import {OrdersPage} from '../orders/orders';
+import {OrderPage} from '../order/order';
+
+
+//Admin pages
+import {MenuPage}  from '../menu/menu';
+import {UsersPage} from '../users/users';
+import {CurrentOrdersPage} from '../current-orders/current-orders';
 
 import {UserModel} from '../../models';
 
@@ -24,6 +33,13 @@ export class HomePage implements OnInit {
     usersWithMessages: Observable<any[]>;
     authInfo: any;
     userData: UserModel;
+    appPages: Array<Object> = [];
+    OrderPage = OrderPage;
+    isAdmin: boolean = false;
+    adminPages: Array<Object> = [{ name: "Orders", component:CurrentOrdersPage}, { name: "All Users", component:UsersPage}];
+    userPages: Array<{name:string,component:Function}> =
+    [{ name: "Your Orders", component:OrdersPage}];
+
 
     constructor(
         @Inject(FirebaseRef) public ref: Firebase,
@@ -42,10 +58,7 @@ export class HomePage implements OnInit {
         // show the login modal page
         this.auth.subscribe((data) => {
             if (data) {
-                if (data.twitter) {
-                    this.authInfo = data.twitter
-                    this.authInfo.displayName = data.twitter.displayName
-                } else if (data.google) {
+                if (data.google) {
                     this.authInfo = data.google;
                     this.authInfo.userId = data.uid;
                     this.authInfo.displayName = data.google.displayName;
@@ -56,14 +69,25 @@ export class HomePage implements OnInit {
                         userId: data.google.userId,
                         profileImageURL: data.google.profileImageURL,
                     };
-
                     this.ref.child("users").child(data.uid).update(this.userData);
 
                 } else {
                     this.authInfo = data.password
                     this.authInfo.displayName = data.password.email
                 }
-                this.textItems = this.af.database.list('/textItems');
+                //prepare pages Array
+                let decider = this.af.object(`users/${data.uid}/role`);
+                decider.subscribe((data)=>{
+                    if(data=='father') {
+                        this.appPages = this.adminPages;
+                        this.isAdmin = true;
+                    }else{
+                        this.appPages = this.userPages;
+
+                    }
+                });
+
+                // this.textItems = this.af.database.list('/textItems');
 
                 //this.getMoreData()
 
@@ -71,7 +95,7 @@ export class HomePage implements OnInit {
                 this.authInfo = null
                 this.displayLoginModal()
             }
-        })
+        });
     }
 
     getMoreData() {
@@ -105,6 +129,10 @@ export class HomePage implements OnInit {
 
     goToOrderPage() {
         this._nav.push(OrdersPage, { userData: this.userData });
+    }
+
+    gotoPage(page) {
+        this._nav.push(page,{userData: this.userData});
     }
 
     /**

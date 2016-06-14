@@ -14,6 +14,10 @@
 		Select menu
 	</ion-title>
 
+	<ion-item [hidden]="(menu | async)?.length">
+    Fetching menu...<ion-spinner icon="lines"></ion-spinner>
+  </ion-item>
+
 	<ion-list>
 		<div *ngFor=" let item of menu | async">
 			<menu-item [item]="item" [isFather]="false" (addItem)="addToOrder(item)">

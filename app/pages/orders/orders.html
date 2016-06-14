@@ -22,7 +22,7 @@
 				Order of <ion-badge>{{ order.amount }}</ion-badge>
 				{{ statusEnum[order.status] }}
 			  <button (click)="cancelOrder(order)" danger small outline item-right
-			  *ngIf="order.status<2"
+			  *ngIf="order.status==0"
 			  >
 			  	<ion-icon name="remove"> </ion-icon>
 			  </button>

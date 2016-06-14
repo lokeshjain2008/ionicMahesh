@@ -9,5 +9,28 @@
 </ion-navbar>
 
 <ion-content padding class="current-orders">
-  
+
+	<ion-card *ngFor="let order of orders | async">
+		<div>
+			<ion-item>
+			<ion-avatar item-left>
+      	<img [src]="order.user.profileImageURL">
+	    </ion-avatar>
+	    <ion-badge item-right>
+	    	{{ order.amount }} /-
+	    </ion-badge>
+	    <h3>{{order.user.displayName}} [{{order.user.email}}]</h3>
+	    <p>{{ displayOrderItems(order) }}</p>
+		</ion-item>
+		<ion-item>
+			<ion-label>Change status</ion-label>
+	  	<ion-select [(ngModel)]="order.status" (ngModelChange)="changeOrderStatus(order,$event)">
+	  		<ion-option *ngFor="let status of statusValues" [value]="status.value">
+	  			{{ status.displayValue }}
+	  		</ion-option>
+	  	</ion-select>
+		</ion-item>
+		</div>
+	</ion-card>
+
 </ion-content>

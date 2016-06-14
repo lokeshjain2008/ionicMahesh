@@ -52,6 +52,7 @@ export class OrdersPage implements OnInit {
    		limitToLast: 20,
    		orderByKey: true
    	}});
+
 	}
 
 	createOrder(){
@@ -60,7 +61,7 @@ export class OrdersPage implements OnInit {
 
 	cancelOrder(order) {
 		let key = order.$key;
-		this.userOrders.remove(order.$key)
+		this.af.list(`user-orders/${this.userData.userId}/orders`).remove(order.$key)
 		.then(()=>{
 			this.af.object(`current-orders/${key}`).remove();
 		},()=>{

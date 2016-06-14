@@ -9,6 +9,8 @@ import {OrderPage} from  '../order/order';
 
 import {UsersPage} from '../users/users';
 
+import {CurrentOrdersPage} from '../current-orders/current-orders';
+
 @Component({
   templateUrl: 'build/pages/getting-started/getting-started.html'
 })
@@ -21,12 +23,12 @@ export class GettingStartedPage {
 
   //loaders
   showLoading(){
-      let loader =  Loading.create({
-          content: "Hello",
-          dismissOnPageChange: true,
-          duration: 3200
-      });
-      this.nav.present(loader);
+    let loader =  Loading.create({
+        content: "Hello",
+        dismissOnPageChange: true,
+        duration: 3200
+    });
+    this.nav.present(loader);
 
   }
 
@@ -37,7 +39,15 @@ export class GettingStartedPage {
 
 
   gotoMenuPage(){
-      this.nav.push(UsersPage);
+      this.nav.push(MenuPage);
+  }
+
+  gotoCurerentOrdresPage(){
+    this.nav.push(CurrentOrdersPage);
+  }
+
+  gotoUsersPage(){
+     this.nav.push(UsersPage);
   }
 
 }

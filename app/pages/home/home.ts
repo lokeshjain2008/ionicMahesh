@@ -41,7 +41,6 @@ export class HomePage implements OnInit {
         // .. otherwise
         // show the login modal page
         this.auth.subscribe((data) => {
-            console.log("in auth subscribe", data)
             if (data) {
                 if (data.twitter) {
                     this.authInfo = data.twitter

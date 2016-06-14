@@ -56,8 +56,9 @@ export class OrderPage implements OnInit{
 				//write Into current Order
 				order.once('value', (snap) => {
 					let orderValue = snap.val();
+					orderValue.user = this.userData;
 					orderValue.userId = this.userData.userId;
-					this.af.object(`current-orders/${snap.key()}`).set(snap.val());
+					this.af.object(`current-orders/${snap.key()}`).set(orderValue);
 
 				}).then((data) => {
 					let toast = Toast.create({

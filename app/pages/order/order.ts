@@ -15,6 +15,7 @@ export class OrderPage implements OnInit{
 	menu: FirebaseListObservable<any>;
 	orders: FirebaseListObservable<any>;
 	userOrders: FirebaseListObservable<any>;
+	requestMade = false;
 	order: OrderModel = { items: [], amount: 0, status: OrderStatusEnum.created };
 
   constructor(public nav: NavController,
@@ -52,6 +53,7 @@ export class OrderPage implements OnInit{
 
   pushOrder() {
 		if (this.order.amount) {
+			this.requestMade = true;
 			this.userOrders.push(this.order).then((order) => {
 				//write Into current Order
 				order.once('value', (snap) => {
@@ -65,8 +67,8 @@ export class OrderPage implements OnInit{
 						message: 'Order was added successfully',
 						duration: 800,
 						dismissOnPageChange: true,
-						showCloseButton: true,
-						position: 'middle'
+						showCloseButton: true
+
 					});
 
 					toast.onDismiss(() => {

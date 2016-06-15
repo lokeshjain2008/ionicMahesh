@@ -34,7 +34,10 @@
 	   <ion-badge>
 	    {{ order.amount }}
 	   </ion-badge>
-	   <button (click)="pushOrder()" secondary outline [disabled]="!order.amount" >
+	   <button (click)="pushOrder()"
+	   secondary outline
+	   [hidden]="requestMade"
+	   [disabled]="!order.amount" >
 	      Create Order
 	    </button>
 	   </div>

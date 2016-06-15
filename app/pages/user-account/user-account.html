@@ -9,5 +9,40 @@
 </ion-navbar>
 
 <ion-content padding class="user-account">
-  
+
+	<ion-item>
+    <ion-avatar item-left>
+      <img [src]="userData.profileImageURL">
+    </ion-avatar>
+    <h2>{{userData.displayName}}</h2>
+    <p>{{userData.email}}</p>
+    <ion-badge item-right>
+    	Pending {{ (main | async)?.amount || 0 }} /-
+    </ion-badge>
+  </ion-item>
+
+	<h3>Add payment</h3>
+	<form (submit)="addPayment()">
+		<ion-item>
+			<ion-label primary floating>
+				Amount
+			</ion-label>
+			<ion-input type="number" [(ngModel)]="payAmount">
+			</ion-input>
+		</ion-item>
+
+		<ion-item no-lines>
+			<button item-right  default>
+				submit
+			</button>
+		</ion-item>
+
+	</form>
+
+	<div padding>
+
+		<button (click)="dismiss()" outline> close</button>
+
+	</div>
+
 </ion-content>

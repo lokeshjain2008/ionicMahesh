@@ -36,7 +36,10 @@ export class HomePage implements OnInit {
     appPages: Array<Object> = [];
     OrderPage = OrderPage;
     isAdmin: boolean = false;
-    adminPages: Array<Object> = [{ name: "Orders", component:CurrentOrdersPage}, { name: "All Users", component:UsersPage}];
+    adminPages: Array<Object> = [{ name: "Orders", component:CurrentOrdersPage},
+    { name: "All Users", component:UsersPage},
+    { name: "Manage Menu", component: MenuPage },
+    ];
     userPages: Array<{name:string,component:Function}> =
     [{ name: "Your Orders", component:OrdersPage}];
 
@@ -121,15 +124,15 @@ export class HomePage implements OnInit {
      * pass in the auth information to the modal to associate the user with the newly
      * created entry
      */
-    addNewItemClicked(_data) {
-        let newItemPage = Modal.create(NewItemModal, { "user": this.authInfo });
-        this._nav.present(newItemPage);
-    }
+    // addNewItemClicked(_data) {
+    //     let newItemPage = Modal.create(NewItemModal, { "user": this.authInfo });
+    //     this._nav.present(newItemPage);
+    // }
 
 
-    goToOrderPage() {
-        this._nav.push(OrdersPage, { userData: this.userData });
-    }
+    // goToOrderPage() {
+    //     this._nav.push(OrdersPage, { userData: this.userData });
+    // }
 
     gotoPage(page) {
         this._nav.push(page,{userData: this.userData});

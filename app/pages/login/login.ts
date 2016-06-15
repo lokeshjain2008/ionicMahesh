@@ -4,7 +4,17 @@ import {FirebaseAuth, FirebaseRef, AuthProviders, AuthMethods } from 'angularfir
 
 
 @Component({
-    templateUrl: 'build/pages/login/login.html'
+    templateUrl: 'build/pages/login/login.html',
+    styles:[`
+        .Aligner {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+      .ptop50{padding-top: 50px;}
+
+    `],
 })
 export class LoginPage {
 

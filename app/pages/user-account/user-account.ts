@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, ViewController} from 'ionic-angular';
 import {AngularFire, FirebaseObjectObservable} from 'angularfire2';
 
 
@@ -16,11 +16,16 @@ import {UserModel} from '../../models';
 export class UserAccountPage implements OnInit{
 	userData: UserModel;
 	userId: string;
+	payAmount: number;
 	main: FirebaseObjectObservable<any>;
 	userAmount: number;
 
-  constructor(public nav: NavController, public params: NavParams, private af: AngularFire ) {
+  constructor(public nav: NavController,
+  	public params: NavParams,
+  	private af: AngularFire,
+  	private view:ViewController ) {
   	this.userData =  params.get('userData');
+
   }
 
   ngOnInit(){
@@ -30,9 +35,14 @@ export class UserAccountPage implements OnInit{
 
   }
 
-  makePayment(payAmount){
-		let amount = this.userAmount - (+payAmount);
+  addPayment(){
+		let amount = this.userAmount - (+this.payAmount);
 		this.main.update({ amount });
+		this.payAmount = null;
+  }
+
+  dismiss(){
+		this.view.dismiss();
   }
 
 }

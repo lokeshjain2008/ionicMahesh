@@ -63,7 +63,10 @@ export class OrderPage implements OnInit{
 				}).then((data) => {
 					let toast = Toast.create({
 						message: 'Order was added successfully',
-						duration: 800
+						duration: 800,
+						dismissOnPageChange: true,
+						showCloseButton: true,
+						position: 'middle'
 					});
 
 					toast.onDismiss(() => {

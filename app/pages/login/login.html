@@ -1,15 +1,16 @@
 <ion-navbar *navbar>
     <ion-title>
-        RL Mumbai Canteen
+        Mahesh Canteen
     </ion-title>
 </ion-navbar>
 <ion-content padding>
     <!-- <h1>User Login</h1> -->
-
-    <div padding>
+    <ion-grid >
+        <ion-row center class="ptop50">
             <!--<button block (click)="registerUserWithGitHub(loginCreds.value, $event)">Connect with GitHub</button>-->
             <button block (click)="registerUserWithGoogle(null, $event)">Connect with Google</button>
-    </div>
+        </ion-row>
+    </ion-grid>
 
     <!-- <form #loginCreds="ngForm">
         <ion-item>

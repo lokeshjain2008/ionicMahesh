@@ -1,11 +1,17 @@
 <ion-navbar *navbar>
     <ion-title>
-        Angular Fire Test App
+        RL Mumbai Canteen
     </ion-title>
 </ion-navbar>
 <ion-content padding>
-    <h1>User Login</h1>
-    <form #loginCreds="ngForm">
+    <!-- <h1>User Login</h1> -->
+
+    <div padding>
+            <!--<button block (click)="registerUserWithGitHub(loginCreds.value, $event)">Connect with GitHub</button>-->
+            <button block (click)="registerUserWithGoogle(null, $event)">Connect with Google</button>
+    </div>
+
+    <!-- <form #loginCreds="ngForm">
         <ion-item>
             <ion-label>Username</ion-label>
             <ion-input type="text" ngControl="email"></ion-input>
@@ -19,13 +25,14 @@
         <div padding>
             <button block (click)="login(loginCreds.value, $event)">Login</button>
             <button block (click)="registerUser(loginCreds.value, $event)">Create Account</button>
-         </div>        
+         </div>
         <div padding>
-            <!--<button block (click)="registerUserWithGitHub(loginCreds.value, $event)">Connect with GitHub</button>-->
+            <button block (click)="registerUserWithGitHub(loginCreds.value, $event)">Connect with GitHub</button>
             <button block (click)="registerUserWithGoogle(loginCreds.value, $event)">Connect with Google</button>
         </div>
         <div padding>
             <p *ngIf="error" class="error">Error:&nbsp;{{ error.code }}</p>
         </div>
-    </form>
+    </form> -->
+
 </ion-content>

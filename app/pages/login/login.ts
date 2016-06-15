@@ -62,7 +62,6 @@ export class LoginPage {
 
     registerUserWithGoogle(_credentials, _event) {
         _event.preventDefault();
-        debugger;
         this.auth.login({
             provider: AuthProviders.Google,
             method: AuthMethods.Popup
@@ -87,29 +86,29 @@ export class LoginPage {
 
         // if this was called from the register user,  the check if we
         // need to create the user object or not
-        let addUser = credentials.created
-        credentials.created = null;
+        // let addUser = credentials.created
+        // credentials.created = null;
 
         // login usig the email/password auth provider
         this.auth.login(credentials, {
             provider: AuthProviders.Password,
             method: AuthMethods.Password
         }).then((authData) => {
-            console.log(authData)
+            // console.log(authData)
 
-            if (addUser) {
-                var auth: FirebaseAuthDataPassword = authData.password
-                return this.ref.child('users')
-                    .child(authData.uid)
-                    .set({
-                        "provider": authData.provider,
-                        "avatar": auth.profileImageURL,
-                        "displayName": auth.email,
-                        "authData" : authData
-                    })
-            } else {
-                this.dismiss()
-            }
+            // if (addUser) {
+            //     var auth: FirebaseAuthDataPassword = authData.password
+            //     return this.ref.child('users')
+            //         .child(authData.uid)
+            //         .set({
+            //             "provider": authData.provider,
+            //             "avatar": auth.profileImageURL,
+            //             "displayName": auth.email,
+            //             "authData" : authData
+            //         })
+            // } else {
+            //     this.dismiss()
+            // }
 
         }).then((value) => {
             this.dismiss()

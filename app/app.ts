@@ -51,6 +51,14 @@ class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      // We can ads now. To the users.
+      if (AdMob) {
+        AdMob.createBanner({
+          adId: 'ca-app-pub-0016905624286295/8498115449',
+          position: AdMob.AD_POSITION.BOTTOM_CENTER,
+          autoShow: true
+        });
+      }
       StatusBar.styleDefault();
     });
   }

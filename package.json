@@ -37,7 +37,8 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
     "phonegap-plugin-barcodescanner",
-    "cordova-plugin-inappbrowser"
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-admobpro"
   ],
   "cordovaPlatforms": [
     "ios",

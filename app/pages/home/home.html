@@ -24,7 +24,7 @@
     </ion-item>
 
 
-    <ion-item *ngFor="let page of appPages">
+    <ion-item *ngFor="let page of appPages" no-lines>
        <button block large (click)="gotoPage(page.component)">
            {{page.name}}
        </button>

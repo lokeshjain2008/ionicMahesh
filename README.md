@@ -35,7 +35,12 @@ Do it in the steps
 
 - `~/Library/Android/sdk/build-tools/23.0.3/zipalign  -v 4 android-release-unsigned.apk MaheshCanteen.apk`
 
+- For ADMob links App ID: ca-app-pub-0016905624286295~7021382249
+	Ad unit ID: ca-app-pub-0016905624286295/8498115449
 
+
+To add add support in the app.
+https://www.thepolyglotdeveloper.com/2016/02/monetize-google-admob-ionic-2-mobile-app/
 
 
 

@@ -36,10 +36,13 @@ export class HomePage implements OnInit {
     appPages: Array<Object> = [];
     OrderPage = OrderPage;
     isAdmin: boolean = false;
+
+
     adminPages: Array<Object> = [{ name: "Orders", component:CurrentOrdersPage},
     { name: "All Users", component:UsersPage},
     { name: "Manage Menu", component: MenuPage },
     ];
+
     userPages: Array<{name:string,component:Function}> =
     [{ name: "Your Orders", component:OrdersPage}];
 

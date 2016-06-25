@@ -68,7 +68,6 @@ export class OrderPage implements OnInit{
 						duration: 800,
 						dismissOnPageChange: true,
 						showCloseButton: true
-
 					});
 
 					toast.onDismiss(() => {
@@ -79,6 +78,5 @@ export class OrderPage implements OnInit{
 			});
 		}
 	}
-
 
 }
